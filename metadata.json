@@ -1,0 +1,6 @@
+{
+  "name": "Mirror AI",
+  "description": "The AI companion that remembers, understands, and grows with you.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

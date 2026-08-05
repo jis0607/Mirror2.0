@@ -7,6 +7,9 @@
 
 ## 📸 App Showcase & Screenshots
 
+![Mirror AI Application Screenshot](./public/hero_screenshot.jpg)
+*Mirror AI Interface featuring CockroachDB Persistent Agentic Memory Cluster sync, pgvector recall nodes, and AWS serverless pipeline integration.*
+
 | 💬 Contextual Chat Companion | 🧠 Persistent Memory Dashboard |
 | :---: | :---: |
 | ![Chat Companion](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80) | ![Memory Network Graph](https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80) |

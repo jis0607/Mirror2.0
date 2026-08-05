@@ -1553,18 +1553,23 @@ export default function App() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-center sm:justify-start space-x-4 pt-4 border-t border-slate-800">
-                  <a href="https://github.com" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
-                    <Github className="w-4 h-4" />
-                    <span>GitHub</span>
+                <div className="flex items-center justify-center sm:justify-start space-x-3 pt-4 border-t border-slate-800 flex-wrap gap-y-2">
+                  <a href="https://github.com/jis0607/Mirror2.0" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 transition-colors flex items-center space-x-2 text-xs font-semibold">
+                    <Github className="w-4 h-4 text-purple-400" />
+                    <span>Project Repository</span>
                   </a>
 
-                  <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
+                  <a href="https://github.com/jis0607" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
+                    <Github className="w-4 h-4" />
+                    <span>GitHub Profile</span>
+                  </a>
+
+                  <a href="https://www.linkedin.com/in/jishnu-singh06/" target="_blank" rel="noreferrer" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
                     <Linkedin className="w-4 h-4 text-blue-400" />
                     <span>LinkedIn</span>
                   </a>
 
-                  <a href="mailto:jishnusingh0607@gmail.com" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
+                  <a href="mailto:jishnusingh0607@gmail.com" className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-colors flex items-center space-x-2 text-xs font-medium">
                     <Mail className="w-4 h-4 text-purple-400" />
                     <span>Email</span>
                   </a>
@@ -1618,16 +1623,16 @@ export default function App() {
 
               <div className="space-y-3">
                 <span className="font-semibold text-slate-200 uppercase tracking-wider block">Connect</span>
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center space-x-1.5 hover:text-white transition-colors">
-                  <Github className="w-3.5 h-3.5" />
-                  <span>GitHub</span>
+                <a href="https://github.com/jis0607/Mirror2.0" target="_blank" rel="noreferrer" className="flex items-center space-x-1.5 hover:text-white transition-colors">
+                  <Github className="w-3.5 h-3.5 text-purple-400" />
+                  <span>GitHub Repo</span>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center space-x-1.5 hover:text-white transition-colors">
-                  <Linkedin className="w-3.5 h-3.5" />
+                <a href="https://www.linkedin.com/in/jishnu-singh06/" target="_blank" rel="noreferrer" className="flex items-center space-x-1.5 hover:text-white transition-colors">
+                  <Linkedin className="w-3.5 h-3.5 text-blue-400" />
                   <span>LinkedIn</span>
                 </a>
                 <a href="mailto:jishnusingh0607@gmail.com" className="flex items-center space-x-1.5 hover:text-white transition-colors">
-                  <Mail className="w-3.5 h-3.5" />
+                  <Mail className="w-3.5 h-3.5 text-slate-400" />
                   <span>Email</span>
                 </a>
               </div>

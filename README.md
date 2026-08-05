@@ -5,23 +5,6 @@
 
 ---
 
-## 📸 App Showcase & Screenshots
-
-![Mirror AI Application Screenshot](./public/hero_screenshot.jpg)
-*Mirror AI Interface featuring CockroachDB Persistent Agentic Memory Cluster sync, pgvector recall nodes, and AWS serverless pipeline integration.*
-
-| 💬 Contextual Chat Companion | 🧠 Persistent Memory Dashboard |
-| :---: | :---: |
-| ![Chat Companion](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80) | ![Memory Network Graph](https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80) |
-| *Real-time conversation backed by CockroachDB vector recall and memory nodes* | *Visual graph of indexed preferences, project state, and long-term context* |
-
-| 🎯 Goals & Velocity Matrix | 📑 Daily Reflection Timeline |
-| :---: | :---: |
-| ![Goals Engine](https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80) | ![Daily Reflections](https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80) |
-| *Milestone progress tracking with ACID durability on CockroachDB* | *Automated daily synthesis, git breakthrough logs, and S3 backup archives* |
-
----
-
 ## ⚡ The Problem: AI Amnesia
 
 Standard LLM chatbots forget everything the second you close your browser tab. They don't know your active coding project, your long-term ambitions, your tech stack preferences, or what you worked on yesterday. Autonomous agents need persistent, multi-region memory that never goes down.
@@ -147,6 +130,8 @@ Open `http://localhost:3000` to launch the Mirror AI Companion interface.
 
 ## 🎥 Submission Links & Resources
 
+* **Developer**: Jishnu Singh ([GitHub Profile](https://github.com/jis0607) | [LinkedIn](https://www.linkedin.com/in/jishnu-singh06/) | `jishnusingh0607@gmail.com`)
+* **GitHub Repository**: [https://github.com/jis0607/Mirror2.0](https://github.com/jis0607/Mirror2.0)
 * **Live Interactive App**: [Mirror AI Preview URL](https://ais-dev-oyqiukmvzejmm3ufsdcqx6-807460345850.asia-east1.run.app)
 * **Devpost Video Showcase**: [Watch < 3 Minute Video](https://youtube.com)
 * **License**: Open Source under the [MIT License](LICENSE)

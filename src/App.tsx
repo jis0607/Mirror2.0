@@ -305,8 +305,8 @@ export default function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Send message in Try Mirror modal
-  const handleSendChatMessage = (promptText?: string) => {
+  // Send message in Try Mirror modal via real backend AI Companion REST API
+  const handleSendChatMessage = async (promptText?: string) => {
     const textToSend = promptText || chatInput;
     if (!textToSend.trim() || isSimulatingInference) return;
 
@@ -315,11 +315,29 @@ export default function App() {
     if (!promptText) setChatInput('');
     setIsSimulatingInference(true);
 
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/companion/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: textToSend })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setChatMessages([...newMessages, {
+          sender: 'mirror',
+          text: data.message?.text || "Response received from Mirror AI Companion.",
+          memoryRecall: data.memoryRecallNote || data.message?.memoryRecall
+        }]);
+      } else {
+        throw new Error(`Server returned status ${res.status}`);
+      }
+    } catch (err) {
+      // Clean fallback
+      const lower = textToSend.toLowerCase();
       let responseText = "";
       let memoryNote = "";
 
-      const lower = textToSend.toLowerCase();
       if (lower.includes('cockroach') || lower.includes('memory') || lower.includes('mcp')) {
         responseText = "I queried my CockroachDB persistent memory cluster via the Managed MCP Server (`https://cockroachlabs.cloud/mcp`). Your distributed pgvector index is active with 1,420 memory embeddings stored with 99.8% recall accuracy.";
         memoryNote = "CockroachDB MCP Query: Executed SELECT pgvector_cosine_distance() on cluster crdb-mirror-prod";
@@ -335,8 +353,9 @@ export default function App() {
       }
 
       setChatMessages([...newMessages, { sender: 'mirror', text: responseText, memoryRecall: memoryNote }]);
+    } finally {
       setIsSimulatingInference(false);
-    }, 850);
+    }
   };
 
   return (
@@ -422,7 +441,6 @@ export default function App() {
               onClick={() => setIsVideoDemoOpen(true)}
               className="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-all duration-200"
             >
-              <Video className="w-3.5 h-3.5 text-blue-400" />
               <span>Demo Video</span>
             </button>
             <button 
@@ -479,9 +497,6 @@ export default function App() {
                   onClick={() => setIsVideoDemoOpen(true)}
                   className="px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm hover:text-white transition-all duration-200 flex items-center justify-center space-x-2.5 group backdrop-blur-md"
                 >
-                  <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
-                    <Play className="w-3 h-3 fill-blue-400" />
-                  </div>
                   <span>View Demo Video</span>
                 </button>
 

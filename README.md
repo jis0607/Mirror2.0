@@ -30,7 +30,7 @@ Traditional single-region databases crash under high-frequency autonomous agent 
 
 **Mirror AI** transforms the LLM interaction pattern from a temporary Q&A tool into a **continuous, self-evolving AI Companion**. 
 
-Powered by **CockroachDB multi-region `pgvector`** and **Managed MCP Server (`https://cockroachlabs.cloud/mcp`)**, Mirror constructs a 6-layer cognitive graph before every response, providing true long-term memory across infinite sessions with zero downtime.
+Powered by **CockroachDB multi-region `pgvector`** and **Managed MCP Server (`https://cockroachlabs.cloud/mcp`)**, Mirror constructs a **7-layer cognitive graph** before every response, combining structured relational tables with semantic vector search and real-time **Emotional Intelligence context** to build a genuine long-term relationship across infinite sessions with zero downtime.
 
 ---
 
@@ -40,7 +40,7 @@ Powered by **CockroachDB multi-region `pgvector`** and **Managed MCP Server (`ht
 | Feature | Implementation Detail |
 | :--- | :--- |
 | **1. Managed MCP Server** | Live connection via `https://cockroachlabs.cloud/mcp` providing audit logging, RBAC, and single-config agent memory inspection. |
-| **2. Distributed `pgvector`** | 1536-dimensional vector embedding store for cosine similarity recall without consistency gaps. |
+| **2. Categorized `pgvector` Store** | Multi-table structure separating Profile, Goals, Projects, Learning, Reflections, and Emotional Context Nodes for precise vector retrieval. |
 | **3. `ccloud` CLI Control Plane** | Service account management, cluster scaling, and backup automation prior to refactoring. |
 | **4. Agent Skills Repo** | Machine-executable SQL optimization and database maintenance skills embedded in the agent workflow. |
 
@@ -54,31 +54,37 @@ Powered by **CockroachDB multi-region `pgvector`** and **Managed MCP Server (`ht
 
 ---
 
-## 🌟 Key Features
+## 🌟 Key Features & AI Companion Architecture
 
-### 1. 🧠 6-Layer Real-Time Context Engine
-Before answering any query, Mirror AI instantly synthesizes 6 contextual vectors:
-1. **User Identity & Preferences**: Skill level, preferred frameworks, communication style.
-2. **Vector Memory Nodes**: Semantic similarity matches retrieved from CockroachDB `pgvector`.
-3. **Active Goals & Velocity**: Deadlines, milestone progress, and streak metrics.
-4. **Project Architecture**: Active repositories, task backlogs, and multi-file dependencies.
-5. **Session Short-Term Memory**: Conversation window summary across recent turns.
-6. **Proactive Architectural Guidance**: Real-time bottleneck detection and suggestions.
+### 1. 🧠 7-Layer Real-Time Context Engine
+Before answering any query, Mirror AI instantly synthesizes 7 contextual vectors:
+1. **User Identity & Personal Profile**: Skill level, preferred frameworks, communication style.
+2. **Emotional Context Layer**: Tracked motivation levels, stress indicators, confidence, and recent setbacks/achievements.
+3. **Categorized Vector Memory Nodes**: Semantic similarity matches retrieved from CockroachDB `pgvector`.
+4. **Active Goals & Velocity**: Deadlines, milestone progress, and streak metrics.
+5. **Project Architecture**: Active repositories, task backlogs, and multi-file dependencies.
+6. **Session Short-Term Memory**: Conversation window summary across recent turns.
+7. **Proactive Relationship & Nudge Engine**: Contextual follow-ups, milestone celebrations, and architectural suggestions.
 
-### 2. 🎯 Goal & Milestone Velocity Engine
+### 2. ❤️ Emotional Intelligence & Relationship Engine
+* **Contextual Awareness, Not Fake Sycophancy**: Never pretends to be human or use cheap boilerplate sympathy ("I'm sorry"). Instead, grounds empathy in real shared history (e.g., *"I remember last week you were excited about this opportunity. I know this is disappointing, but look at the backend progress you've achieved."*).
+* **Categorized Emotional Nodes**: Detects stress, frustration, burnout signals, and milestone pride, persisting them as structured `emotion` nodes in CockroachDB.
+* **Calm Milestone Celebrations**: Acknowledges real developer achievements and goal completions without hyperbolic exaggeration.
+
+### 3. 🎯 Goal & Milestone Velocity Engine
 * Breaks ambitious technical projects into actionable daily milestones stored with ACID durability.
 * Tracks developer velocity, streak metrics, and milestone completion percentages in real time.
 
-### 3. 🗂️ Project Awareness Workspace
+### 4. 🗂️ Project Awareness Workspace
 * Maps code file trees, dependencies, and completed benchmarks.
 * Runs safety checks via the `ccloud` CLI before introducing structural codebase changes.
 
-### 4. 📑 Automated Daily Reflection Engine
+### 5. 📑 Automated Daily Reflection Engine
 * Synthesizes end-of-day accomplishment logs, focus trends, and commit breakthroughs.
 * Automatically archives daily reflection artifacts to Amazon S3.
 
-### 5. 💡 Proactive Nudge Engine
-* Identifies impending deadlines, unaddressed edge cases, or architecture bottlenecks and proactively suggests solutions.
+### 6. 💡 Proactive Check-Ins & Nudge Engine
+* Automatically greets users with context-aware follow-ups on past blockers (*"Welcome back! Yesterday you were debugging the memory engine. Did you solve it?"*).
 
 ---
 

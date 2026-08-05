@@ -3,6 +3,7 @@ import { memoryEngineInstance } from './MemoryEngine';
 import { goalTrackerInstance } from './GoalTracker';
 import { projectTrackerInstance } from './ProjectTracker';
 import { suggestionEngineInstance } from './SuggestionEngine';
+import { emotionalEngineInstance } from './EmotionalEngine';
 
 export class ContextEngine {
   private recentConversationHistory: string[] = [
@@ -11,28 +12,35 @@ export class ContextEngine {
   ];
 
   public assembleContext(userQuery: string): ContextPayload {
-    // 1. Retrieve relevant memories using query relevance
-    const relevantMemories = memoryEngineInstance.queryMemories(userQuery, 4);
+    // 1. Analyze and record any emotional cues from current query
+    emotionalEngineInstance.analyzeAndRecordEmotionalCues(userQuery);
 
-    // 2. Retrieve active goals
+    // 2. Retrieve relevant memories using query relevance
+    const relevantMemories = memoryEngineInstance.queryMemories(userQuery, 5);
+
+    // 3. Retrieve active goals
     const activeGoals = goalTrackerInstance.getActiveGoals();
 
-    // 3. Retrieve active project awareness
+    // 4. Retrieve active project awareness
     const activeProject = projectTrackerInstance.getActiveProject();
 
-    // 4. Retrieve user profile preferences
+    // 5. Retrieve user profile preferences
     const userProfile = memoryEngineInstance.getProfile();
 
-    // 5. Recent conversation summary
+    // 6. Retrieve emotional context payload
+    const emotionalContext = emotionalEngineInstance.getEmotionalPayload();
+
+    // 7. Recent conversation summary
     const recentConversationSummary = this.recentConversationHistory.join(" | ");
 
-    // 6. Proactive suggestions
+    // 8. Assemble full payload
     const partialPayload: ContextPayload = {
       userProfile,
       relevantMemories,
       activeGoals,
       activeProject,
       recentConversationSummary,
+      emotionalContext,
       proactiveSuggestions: []
     };
 

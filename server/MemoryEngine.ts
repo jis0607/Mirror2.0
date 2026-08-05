@@ -79,6 +79,14 @@ export class MemoryEngine {
   }
 
   public addMemory(category: MemoryCategory, title: string, content: string, tags: string[] = [], source: string = 'User Chat'): MemoryNode {
+    // Check for duplicate memory content to avoid cluttering memory graph
+    const lowerContent = content.toLowerCase().trim();
+    const existing = this.memories.find(m => m.category === category && m.content.toLowerCase().trim() === lowerContent);
+    if (existing) {
+      existing.timestamp = new Date().toISOString();
+      return existing;
+    }
+
     const newNode: MemoryNode = {
       id: `mem-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
       category,
@@ -107,6 +115,7 @@ export class MemoryEngine {
       if (lowerQuery.includes('cockroach') && memText.includes('cockroach')) score += 5;
       if (lowerQuery.includes('goal') && mem.category === 'goal') score += 4;
       if (lowerQuery.includes('project') && mem.category === 'project') score += 4;
+      if ((lowerQuery.includes('learn') || lowerQuery.includes('study') || lowerQuery.includes('subject')) && mem.category === 'learning') score += 4;
 
       return { mem, score };
     });
@@ -121,7 +130,9 @@ export class MemoryEngine {
   public extractAndStoreMemoriesFromChat(userText: string): MemoryNode | null {
     const lower = userText.toLowerCase();
 
-    if (lower.includes('my goal') || lower.includes('i want to build') || lower.includes('i plan to')) {
+    if (lower.includes('learning') || lower.includes('study') || lower.includes('course') || lower.includes('dsa') || lower.includes('weak in')) {
+      return this.addMemory('learning', 'Learning History Node', userText, ['learning', 'skill-track']);
+    } else if (lower.includes('my goal') || lower.includes('i want to build') || lower.includes('i plan to')) {
       return this.addMemory('goal', 'Extracted Goal', userText, ['user-goal', 'extracted']);
     } else if (lower.includes('my project') || lower.includes('working on')) {
       return this.addMemory('project', 'Extracted Project Detail', userText, ['user-project', 'extracted']);

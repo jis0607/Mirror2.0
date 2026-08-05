@@ -9,6 +9,7 @@ import { projectTrackerInstance } from './server/ProjectTracker';
 import { reflectionEngineInstance } from './server/ReflectionEngine';
 import { contextEngineInstance } from './server/ContextEngine';
 import { suggestionEngineInstance } from './server/SuggestionEngine';
+import { emotionalEngineInstance } from './server/EmotionalEngine';
 
 async function startServer() {
   const app = express();
@@ -64,7 +65,12 @@ async function startServer() {
     res.json({ success: true, memory: mem });
   });
 
-  // 3. Goal Tracking Endpoints
+  // 3. Emotional Context Endpoint
+  app.get('/api/companion/emotions', (req, res) => {
+    res.json({ emotionalContext: emotionalEngineInstance.getEmotionalPayload() });
+  });
+
+  // 4. Goal Tracking Endpoints
   app.get('/api/companion/goals', (req, res) => {
     res.json({ goals: goalTrackerInstance.getAllGoals() });
   });

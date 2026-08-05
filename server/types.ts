@@ -1,4 +1,4 @@
-export type MemoryCategory = 'goal' | 'project' | 'preference' | 'habit' | 'conversation';
+export type MemoryCategory = 'profile' | 'goal' | 'project' | 'learning' | 'preference' | 'habit' | 'conversation' | 'reflection' | 'emotion' | 'relationship';
 
 export interface MemoryNode {
   id: string;
@@ -10,6 +10,26 @@ export interface MemoryNode {
   timestamp: string;
   source: string;
   tags: string[];
+}
+
+export interface EmotionalContextNode {
+  id: string;
+  category: 'emotion';
+  title: string;
+  reason: string;
+  emotionType: 'motivation' | 'stress' | 'confidence' | 'excitement' | 'frustration' | 'burnout' | 'achievement' | 'setback';
+  intensity: 'low' | 'moderate' | 'high';
+  timestamp: string;
+  confidence: 'Medium' | 'High';
+}
+
+export interface EmotionalContextPayload {
+  currentMotivation: 'high' | 'neutral' | 'low';
+  currentStress: 'calm' | 'elevated' | 'high';
+  confidenceLevel: 'confident' | 'balanced' | 'uncertain';
+  recentEmotions: EmotionalContextNode[];
+  recentAchievements: string[];
+  recentSetbacks: string[];
 }
 
 export interface UserPreferences {
@@ -74,6 +94,7 @@ export interface ContextPayload {
   activeProject: ProjectItem | null;
   recentConversationSummary: string;
   proactiveSuggestions: ProactiveSuggestion[];
+  emotionalContext: EmotionalContextPayload;
 }
 
 export interface ChatMessage {

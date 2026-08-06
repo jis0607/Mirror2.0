@@ -3,12 +3,12 @@ import { MemoryNode, MemoryCategory, UserPreferences } from './types';
 export class MemoryEngine {
   private memories: MemoryNode[] = [];
   private userProfile: UserPreferences = {
-    codingLevel: 'lead',
-    preferredFrameworks: ['React 19', 'Tailwind CSS v4', 'Express.js', 'Node.js', 'TypeScript'],
-    preferredDB: ['CockroachDB Cloud', 'pgvector', 'Managed MCP Server'],
+    codingLevel: 'intermediate',
+    preferredFrameworks: ['React', 'TypeScript', 'Express.js', 'Tailwind CSS'],
+    preferredDB: ['CockroachDB Cloud', 'pgvector'],
     communicationStyle: 'concise',
-    ambitions: ['Build production-grade AI Companion apps with persistent agentic memory', 'Win CockroachDB x AWS Hackathon 2026'],
-    habits: ['Daily git commit streak', 'Clean ESM architecture', 'ACID-compliant state management']
+    ambitions: [],
+    habits: []
   };
 
   constructor() {
@@ -18,62 +18,26 @@ export class MemoryEngine {
   private seedInitialMemories() {
     this.memories = [
       {
-        id: 'mem-1',
+        id: 'mem-init',
         category: 'project',
-        title: 'Project Mirror AI Architecture',
-        content: 'Building Mirror AI as an AI Companion with CockroachDB pgvector vector store, Express server, and AWS Lambda serverless execution.',
+        title: 'CockroachDB Vector Memory Ready',
+        content: 'Agentic vector memory store initialized on CockroachDB pgvector. Ready to record new user profile and interaction memories.',
         timestamp: new Date().toISOString(),
         source: 'System Initialization',
-        tags: ['cockroachdb', 'pgvector', 'aws-lambda', 'mirror-ai']
-      },
-      {
-        id: 'mem-2',
-        category: 'goal',
-        title: 'Submit CockroachDB x AWS Hackathon Entry',
-        content: 'Deadline: August 18, 2026. Required tools: CockroachDB Managed MCP Server, pgvector, AWS Lambda, Amazon S3. Public GitHub repo & demo video required.',
-        timestamp: new Date().toISOString(),
-        source: 'Hackathon Rulebook',
-        tags: ['hackathon', 'deadline', 'devpost', 'cockroachdb']
-      },
-      {
-        id: 'mem-3',
-        category: 'preference',
-        title: 'Technical Preference & Stack',
-        content: 'Prefers TypeScript, React 19, Tailwind CSS v4, Express.js backend, sub-100ms LPU response time, and modular SOLID architecture.',
-        timestamp: new Date().toISOString(),
-        source: 'User Profile',
-        tags: ['preferences', 'typescript', 'react', 'tailwind']
-      },
-      {
-        id: 'mem-4',
-        category: 'habit',
-        title: 'Developer Work Pattern',
-        content: 'Focuses on deep work sessions around 2:00 PM, maintains continuous git commit streaks, prefers clean code over monolithic files.',
-        timestamp: new Date().toISOString(),
-        source: 'Behavioral Observation',
-        tags: ['habits', 'productivity', 'deep-work']
-      },
-      {
-        id: 'mem-5',
-        category: 'conversation',
-        title: 'Agentic Memory Discussion',
-        content: 'Discussed why agentic memory requires distributed multi-region databases like CockroachDB to prevent context loss during autonomous agent execution.',
-        timestamp: new Date().toISOString(),
-        source: 'Recent Session',
-        tags: ['agentic-memory', 'distributed-db', 'mcp']
+        tags: ['cockroachdb', 'pgvector', 'system-ready']
       }
     ];
   }
 
   public clearAllMemories(): void {
-    this.memories = [];
+    this.seedInitialMemories();
     this.userProfile = {
       codingLevel: 'intermediate',
       preferredFrameworks: ['React', 'TypeScript', 'Express.js', 'Tailwind CSS'],
       preferredDB: ['CockroachDB Cloud', 'pgvector'],
       communicationStyle: 'concise',
-      ambitions: ['Build AI Companion apps with persistent memory'],
-      habits: ['Clean modular architecture']
+      ambitions: [],
+      habits: []
     };
   }
 

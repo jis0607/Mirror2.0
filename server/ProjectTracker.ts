@@ -6,26 +6,19 @@ export class ProjectTracker {
     name: 'Mirror AI Companion',
     subtitle: 'Persistent Agentic Memory Web Application',
     techStack: [
-      'React 19',
+      'React',
       'Vite',
-      'Tailwind CSS v4',
+      'Tailwind CSS',
       'Express.js',
-      'CockroachDB pgvector',
-      'Managed MCP Server',
-      'AWS Lambda',
-      'Groq LPU API / Gemini 3.6 Flash'
+      'CockroachDB pgvector'
     ],
-    architectureSummary: 'Full-stack Express + Vite architecture with server-side AI Companion pipeline, CockroachDB vector memory engine, AWS Lambda event handlers, and real-time Context Engine.',
+    architectureSummary: 'Full-stack Express + Vite architecture with server-side AI Companion pipeline and CockroachDB vector memory engine.',
     activeTasks: [
-      'Finalize backend AI Companion Context Engine REST API',
-      'Verify persistent memory recall across user chat sessions',
-      'Verify Devpost hackathon rule compliance and documentation'
+      'Record new user details and preferences',
+      'Store persistent memories in pgvector'
     ],
     completedTasks: [
-      'Implemented clean, high-contrast glassmorphism UI layout',
-      'Added CockroachDB Managed MCP Server connection',
-      'Configured AWS Lambda and Amazon S3 reflection backup routes',
-      'Integrated @google/genai TypeScript SDK server-side'
+      'Initialized clean memory session'
     ],
     lastModified: new Date().toISOString(),
     status: 'in_progress'
@@ -37,24 +30,15 @@ export class ProjectTracker {
 
   public resetProject(): void {
     this.activeProject = {
-      id: 'proj-mirror',
-      name: 'Mirror AI Companion',
-      subtitle: 'Persistent Agentic Memory Web Application',
-      techStack: [
-        'React',
-        'Vite',
-        'Tailwind CSS',
-        'Express.js',
-        'CockroachDB pgvector'
-      ],
-      architectureSummary: 'Full-stack Express + Vite architecture with server-side AI Companion pipeline and CockroachDB vector memory engine.',
+      id: 'proj-new',
+      name: 'New Chat Session',
+      subtitle: 'Awaiting User Project Input',
+      techStack: [],
+      architectureSummary: 'Ready to record project architecture and details.',
       activeTasks: [
-        'Record new user details and preferences',
-        'Store persistent memories in pgvector'
+        'Awaiting user prompt'
       ],
-      completedTasks: [
-        'Initialized clean memory session'
-      ],
+      completedTasks: [],
       lastModified: new Date().toISOString(),
       status: 'in_progress'
     };

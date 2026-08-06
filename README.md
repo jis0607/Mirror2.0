@@ -1,14 +1,8 @@
 <p align="center">
-  <img src="public/standing_mirror_logo.jpg" width="150" alt="" style="border-radius: 20px;">
+  <img src="public/logo.png" width="150" alt="Mirror 2.0 Logo">
 </p>
 
-<h1 align="center"><img width="169" height="170" alt="image" src=<img width="104" height="110" alt="image" src="https://github.com/user-attachments/assets/11918dcf-ef8c-46e0-b42a-2bb760192583" />
- />
-</h1>
-
-<p align="center">
-Mirror2.0
-</p>
+<h1 align="center">🪞 Mirror 2.0</h1>
 
 <p align="center">
 An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you</b> using persistent memory powered by CockroachDB pgvector and AWS.
@@ -28,11 +22,11 @@ An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you
 
 <p align="center">
 
-<a href="https://github.com/jis0607/Mirror2.0">🌐 Live Demo</a> •
-<a href="https://github.com/jis0607/Mirror2.0">🎥 Demo Video</a> •
-<a href="#-features">✨ Features</a> •
-<a href="#-architecture">🏗 Architecture</a> •
-<a href="#-getting-started">🚀 Getting Started</a>
+<a href="https://mirror2-0.onrender.com">🌐 Live Demo</a> •
+<a href="YOUR_VIDEO_LINK">🎥 Demo Video</a> •
+<a href="#features">✨ Features</a> •
+<a href="#architecture">🏗 Architecture</a> •
+<a href="#getting-started">🚀 Getting Started</a>
 
 </p>
 
@@ -44,9 +38,9 @@ An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you
 
 <p align="center">
 
-<a href="https://github.com/jis0607/Mirror2.0">
+<a href="YOUR_VIDEO_LINK">
 
-<img src="assets/demo-thumbnail.png" width="100%" alt="Demo Video Thumbnail">
+<img src="assets/demo-thumbnail.png" width="100%">
 
 </a>
 
@@ -54,7 +48,7 @@ An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you
 
 <p align="center">
 
-<a href="https://github.com/jis0607/Mirror2.0">
+<a href="YOUR_VIDEO_LINK">
 
 <img src="https://img.shields.io/badge/▶️%20WATCH%20DEMO%20VIDEO-red?style=for-the-badge">
 
@@ -66,18 +60,18 @@ An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you
 
 # 📑 Table of Contents
 
-- [Overview](#-overview)
-- [Problem](#-problem)
-- [Solution](#-solution)
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Memory Pipeline](#-memory-pipeline)
-- [Screenshots](#-screenshots)
-- [Technology Stack](#-technology-stack)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
-- [Future Roadmap](#-future-roadmap)
-- [License](#-license)
+- Overview
+- Problem
+- Solution
+- Features
+- Architecture
+- Memory Flow
+- Screenshots
+- Technology Stack
+- Repository Structure
+- Getting Started
+- Future Work
+- License
 
 ---
 
@@ -95,10 +89,10 @@ Mirror 2.0 introduces a production-grade persistent memory system where conversa
 
 Current AI assistants:
 
-- Forget past conversations & preferences
-- Lose project context across sessions
-- Cannot build genuine, long-term relationships
-- Restart from zero context on every session
+- Forget conversations
+- Lose project context
+- Cannot build long-term relationships
+- Restart from zero every session
 
 ---
 
@@ -106,7 +100,7 @@ Current AI assistants:
 
 Mirror 2.0 stores every important interaction as semantic memory.
 
-Instead of remembering raw chat history,
+Instead of remembering chat history,
 
 it remembers **meaning**.
 
@@ -116,16 +110,16 @@ Using vector embeddings, the assistant retrieves relevant memories before genera
 
 # ✨ Features
 
-- 🧠 **Persistent AI Memory**: Long-term context indexing powered by CockroachDB.
-- 🔍 **Semantic Vector Search**: High-dimensional `pgvector` similarity retrieval.
-- ⚡ **CockroachDB pgvector**: Managed vector database engine via MCP server integration.
-- ☁ **AWS Cloud Infrastructure**: Serverless Lambda pipeline and S3 backups.
-- 🤖 **Gemini Powered Responses**: Deep contextual reasoning using Google Gemini models.
-- 💬 **Multiple Chat Sessions**: ChatGPT & Claude style sidebar with local storage persistence.
-- 📈 **Memory Graph Inspector**: Real-time vector node browser with cosine similarity testing.
-- 🔄 **Long-term Context Recall**: Recalls goals, preferences, emotional state, and milestones.
-- 🎯 **Agentic Memory Architecture**: Proactive nudges, milestone tracking, and relationship intelligence.
-- 🌍 **Production Ready Deployment**: Full-stack Express + React 19 architecture ready for Cloud Run.
+- 🧠 Persistent AI Memory
+- 🔍 Semantic Vector Search
+- ⚡ CockroachDB pgvector
+- ☁ AWS Lambda Memory Sync
+- 🤖 Gemini Powered Responses
+- 💬 Multiple Chat Sessions
+- 📈 Memory Timeline
+- 🔄 Long-term Context Recall
+- 🎯 Agentic Memory Architecture
+- 🌍 Production Ready Deployment
 
 ---
 
@@ -133,7 +127,7 @@ Using vector embeddings, the assistant retrieves relevant memories before genera
 
 <p align="center">
 
-<img src="assets/architecture.png" width="900" alt="Mirror 2.0 System Architecture">
+<img src="assets/architecture.png" width="900">
 
 </p>
 
@@ -162,13 +156,19 @@ Final Personalized Response
 
 # 🧠 Memory Pipeline
 
-1. **User sends a message** in the chat UI
-2. **Important information extracted** (identity, goals, preferences, emotional cues)
-3. **1536-dimensional Embedding generated** for key concepts
-4. **Stored inside CockroachDB pgvector** cluster
-5. **Future queries perform similarity search** to retrieve context vectors
-6. **Relevant memories injected** into the Gemini system prompt
-7. **Personalized, context-aware response generated**
+1. User sends a message
+
+2. Important information extracted
+
+3. Embedding generated
+
+4. Stored inside CockroachDB pgvector
+
+5. Future queries perform similarity search
+
+6. Relevant memories injected into Gemini prompt
+
+7. Personalized response generated
 
 ---
 
@@ -177,31 +177,31 @@ Final Personalized Response
 ## Landing Page
 
 <p align="center">
-<img src="screenshots/home.png" alt="Home Landing Page">
+<img src="screenshots/home.png">
 </p>
 
 ---
 
-## AI Chat & History Sidebar
+## AI Chat
 
 <p align="center">
-<img src="screenshots/chat.png" alt="Interactive AI Chat Sandbox">
+<img src="screenshots/chat.png">
 </p>
 
 ---
 
-## Persistent Memory Graph
+## Persistent Memory
 
 <p align="center">
-<img src="screenshots/memory.png" alt="CockroachDB Vector Memory Graph">
+<img src="screenshots/memory.png">
 </p>
 
 ---
 
-## Architecture Diagram
+## Architecture
 
 <p align="center">
-<img src="screenshots/architecture.png" alt="System Architecture Diagram">
+<img src="screenshots/architecture.png">
 </p>
 
 ---
@@ -210,13 +210,14 @@ Final Personalized Response
 
 | Category | Technology |
 |-----------|------------|
-| **Frontend** | React 19 + TypeScript + Vite |
-| **Backend** | Express.js + TypeScript |
-| **AI Model** | Google Gemini API (`@google/genai`) |
-| **Database** | CockroachDB (Managed MCP Server) |
-| **Vector Engine** | `pgvector` embeddings |
-| **Cloud** | AWS Lambda + S3 Infrastructure |
-| **Styling** | Tailwind CSS + Lucide Icons |
+| Frontend | React |
+| Backend | Express + TypeScript |
+| AI | Google Gemini |
+| Database | CockroachDB |
+| Vector DB | pgvector |
+| Cloud | AWS Lambda |
+| Deployment | Render |
+| Styling | Tailwind CSS |
 
 ---
 
@@ -226,19 +227,8 @@ Final Personalized Response
 Mirror2.0
 │
 ├── public/
-│   └── standing_mirror_logo.jpg
 ├── src/
-│   ├── components/
-│   │   ├── ChatSidebar.tsx
-│   │   └── MemoryGraphModal.tsx
-│   ├── App.tsx
-│   ├── main.tsx
-│   ├── types.ts
-│   └── index.css
 ├── server/
-│   ├── AICompanion.ts
-│   ├── MemoryEngine.ts
-│   └── ProjectTracker.ts
 ├── screenshots/
 ├── assets/
 ├── README.md
@@ -250,54 +240,53 @@ Mirror2.0
 
 # 🚀 Getting Started
 
-### 1. Clone the repository
-
 ```bash
 git clone https://github.com/jis0607/Mirror2.0
+
 cd Mirror2.0
-```
 
-### 2. Install dependencies
-
-```bash
 npm install
-```
 
-### 3. Configure environment variables
-
-Create a `.env` file in the project root:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-GROQ_API_KEY=your_groq_api_key_here
-DATABASE_URL=your_cockroachdb_connection_string
-```
-
-### 4. Run the development server
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Create
+
+```
+.env
+```
+
+```
+GEMINI_API_KEY=
+
+GROQ_API_KEY=
+
+DATABASE_URL=
+```
+
+Run
+
+```
+npm run dev
+```
 
 ---
 
 # 🔮 Future Roadmap
 
-- 🎙 **Voice Conversations**: Real-time voice interaction with emotional tone synthesis.
-- ✏ **Memory Editing**: User-facing controls to edit or prune indexed memories.
-- 🔄 **Cross-device Sync**: Cloud-synced chat history across browser sessions.
-- 🤖 **Multi-Agent Collaboration**: Specialized sub-agents for coding, planning, and review.
-- 💡 **Emotion Detection**: Deep sentiment analysis for nuanced companion responses.
-- 📅 **Calendar & Tasks Integration**: Proactive reminder triggers for upcoming deadlines.
-- 📚 **RAG Knowledge Base**: Upload personal documents and codebases into memory.
+- Voice Conversations
+- Memory Editing
+- Cross-device Sync
+- Multi-Agent Collaboration
+- Emotion Detection
+- Calendar Integration
+- RAG Knowledge Base
 
 ---
 
 # 📜 License
 
-Distributed under the [MIT License](LICENSE).
+MIT License
 
 ---
 

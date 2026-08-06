@@ -38,7 +38,8 @@ A 10–15 second GIF showing: Landing Page → Launch Mirror → Chat → Memory
 Show the complete Mirror AI landing page with the hero section visible, highlighting the persistent memory companion title and call to action.
 
 **Recommended filename:**  
-`docs/images/landing-page.png`
+`<img width="955" height="376" alt="Screenshot 2026-08-06 091313" src="https://github.com/user-attachments/assets/0bc1dd06-df44-4967-9a68-7538beb99133" />
+`
 
 ---
 

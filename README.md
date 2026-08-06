@@ -2,7 +2,8 @@
   <img src="public/standing_mirror_logo.jpg" width="150" alt="" style="border-radius: 20px;">
 </p>
 
-<h1 align="center"><img width="169" height="170" alt="image" src="https://github.com/user-attachments/assets/25ac38f8-ffad-43e4-bb87-90342bdeb62c" />
+<h1 align="center"><img width="169" height="170" alt="image" src=<img width="104" height="110" alt="image" src="https://github.com/user-attachments/assets/11918dcf-ef8c-46e0-b42a-2bb760192583" />
+ />
 </h1>
 
 <p align="center">

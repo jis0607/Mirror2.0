@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import standingMirrorLogo from './assets/images/standing_mirror_logo_1785987560344.jpg';
+import { ChatMessage, ChatSession } from './types';
+import { ChatSidebar } from './components/ChatSidebar';
 import { 
   Sparkles, 
   Brain, 
@@ -43,7 +45,11 @@ import {
   Video,
   Key,
   ChevronDown,
-  Share2
+  Share2,
+  MessageSquare,
+  Plus,
+  Pencil,
+  PanelLeft
 } from 'lucide-react';
 
 // --- DATA STRUCTURES ---
@@ -347,20 +353,116 @@ export default function App() {
   const [isArchDiagramOpen, setIsArchDiagramOpen] = useState(false);
   
   // Clean initial greeting for new chat sessions
-  const CLEAN_INITIAL_MESSAGE = {
+  const CLEAN_INITIAL_MESSAGE: ChatMessage = {
     sender: 'mirror' as const,
     text: "Hello! I am **Mirror AI**, your long-term AI Companion powered by CockroachDB pgvector. I don't have any saved memories about you yet—what is your name, or what are you working on today?",
     memoryRecall: 'CockroachDB Recall: Memory layer clean | Ready to record new user memories'
   };
 
-  // Interactive Chat Sandbox state
-  const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'mirror'; text: string; memoryRecall?: string }>>([
-    CLEAN_INITIAL_MESSAGE
-  ]);
+  // Sidebar collapse state & auto-scroll ref
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const chatEndRef = useRef<HTMLDivElement | null>(null);
+
+  // Chat sessions state synced with browser LocalStorage only
+  const [chatSessions, setChatSessions] = useState<ChatSession[]>(() => {
+    try {
+      const saved = localStorage.getItem('mirror_ai_chat_sessions_v1');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch (err) {
+      console.error('Failed to parse chat sessions from LocalStorage:', err);
+    }
+    const defaultSession: ChatSession = {
+      id: `chat-${Date.now()}`,
+      title: 'New Conversation',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      messages: [CLEAN_INITIAL_MESSAGE]
+    };
+    return [defaultSession];
+  });
+
+  const [activeChatId, setActiveChatId] = useState<string>(() => {
+    return chatSessions[0]?.id || `chat-${Date.now()}`;
+  });
+
   const [chatInput, setChatInput] = useState('');
   const [isSimulatingInference, setIsSimulatingInference] = useState(false);
 
-  // Reset Memory / New Chat handler
+  // Sync sessions to LocalStorage on change
+  useEffect(() => {
+    try {
+      localStorage.setItem('mirror_ai_chat_sessions_v1', JSON.stringify(chatSessions));
+    } catch (err) {
+      console.error('Failed to save chat sessions to LocalStorage:', err);
+    }
+  }, [chatSessions]);
+
+  // Derived active session & messages
+  const activeSession = chatSessions.find(s => s.id === activeChatId) || chatSessions[0];
+  const chatMessages = activeSession ? activeSession.messages : [CLEAN_INITIAL_MESSAGE];
+
+  // Auto scroll to bottom of chat
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages, isSimulatingInference]);
+
+  // Sidebar & Chat actions
+  const handleNewChat = () => {
+    const newId = `chat-${Date.now()}`;
+    const newSession: ChatSession = {
+      id: newId,
+      title: 'New Conversation',
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      messages: [CLEAN_INITIAL_MESSAGE]
+    };
+    setChatSessions(prev => [newSession, ...prev]);
+    setActiveChatId(newId);
+    setChatInput('');
+  };
+
+  const handleSelectChat = (id: string) => {
+    setActiveChatId(id);
+  };
+
+  const handleDeleteChat = (id: string) => {
+    setChatSessions(prev => {
+      const filtered = prev.filter(s => s.id !== id);
+      if (filtered.length === 0) {
+        const freshId = `chat-${Date.now()}`;
+        const freshSession: ChatSession = {
+          id: freshId,
+          title: 'New Conversation',
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          messages: [CLEAN_INITIAL_MESSAGE]
+        };
+        setActiveChatId(freshId);
+        return [freshSession];
+      } else {
+        if (activeChatId === id) {
+          setActiveChatId(filtered[0].id);
+        }
+        return filtered;
+      }
+    });
+  };
+
+  const handleRenameChat = (id: string, newTitle: string) => {
+    setChatSessions(prev => prev.map(s => {
+      if (s.id === id) {
+        return { ...s, title: newTitle, updatedAt: Date.now() };
+      }
+      return s;
+    }));
+  };
+
+  // Reset Memory / New Chat handler (Wipes CockroachDB memory layer backend)
   const handleResetMemory = async () => {
     setIsSimulatingInference(true);
     try {
@@ -368,7 +470,16 @@ export default function App() {
     } catch (err) {
       console.error('Reset memory API call failed:', err);
     } finally {
-      setChatMessages([CLEAN_INITIAL_MESSAGE]);
+      setChatSessions(prev => prev.map(s => {
+        if (s.id === activeChatId) {
+          return {
+            ...s,
+            updatedAt: Date.now(),
+            messages: [CLEAN_INITIAL_MESSAGE]
+          };
+        }
+        return s;
+      }));
       setIsSimulatingInference(false);
     }
   };
@@ -387,10 +498,48 @@ export default function App() {
     const textToSend = promptText || chatInput;
     if (!textToSend.trim() || isSimulatingInference) return;
 
-    const newMessages = [...chatMessages, { sender: 'user' as const, text: textToSend }];
-    setChatMessages(newMessages);
     if (!promptText) setChatInput('');
     setIsSimulatingInference(true);
+
+    let currentSession = chatSessions.find(s => s.id === activeChatId);
+    let currentId = activeChatId;
+
+    if (!currentSession) {
+      currentId = `chat-${Date.now()}`;
+      currentSession = {
+        id: currentId,
+        title: 'New Conversation',
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        messages: [CLEAN_INITIAL_MESSAGE]
+      };
+      setActiveChatId(currentId);
+    }
+
+    // Auto-generate chat title from user's first prompt if title is still default
+    let sessionTitle = currentSession.title;
+    const isDefaultTitle = sessionTitle === 'New Conversation' || sessionTitle === 'New Chat' || sessionTitle === 'Untitled';
+    if (isDefaultTitle) {
+      const cleanPrompt = textToSend.trim();
+      sessionTitle = cleanPrompt.slice(0, 32) + (cleanPrompt.length > 32 ? '...' : '');
+      sessionTitle = sessionTitle.charAt(0).toUpperCase() + sessionTitle.slice(1);
+    }
+
+    const userMsg: ChatMessage = { sender: 'user', text: textToSend, timestamp: Date.now() };
+    const updatedMessagesWithUser = [...currentSession.messages, userMsg];
+
+    setChatSessions(prev => {
+      const exists = prev.some(s => s.id === currentId);
+      if (!exists) {
+        return [{ ...currentSession!, title: sessionTitle, updatedAt: Date.now(), messages: updatedMessagesWithUser }, ...prev];
+      }
+      return prev.map(s => {
+        if (s.id === currentId) {
+          return { ...s, title: sessionTitle, updatedAt: Date.now(), messages: updatedMessagesWithUser };
+        }
+        return s;
+      });
+    });
 
     try {
       const res = await fetch('/api/companion/chat', {
@@ -399,16 +548,30 @@ export default function App() {
         body: JSON.stringify({ message: textToSend })
       });
 
+      let responseText = "";
+      let memoryNote = "";
+
       if (res.ok) {
         const data = await res.json();
-        setChatMessages([...newMessages, {
-          sender: 'mirror',
-          text: data.message?.text || "Response received from Mirror AI Companion.",
-          memoryRecall: data.memoryRecallNote || data.message?.memoryRecall
-        }]);
+        responseText = data.message?.text || "Response received from Mirror AI Companion.";
+        memoryNote = data.memoryRecallNote || data.message?.memoryRecall;
       } else {
         throw new Error(`Server returned status ${res.status}`);
       }
+
+      const mirrorMsg: ChatMessage = {
+        sender: 'mirror',
+        text: responseText,
+        memoryRecall: memoryNote,
+        timestamp: Date.now()
+      };
+
+      setChatSessions(prev => prev.map(s => {
+        if (s.id === currentId) {
+          return { ...s, updatedAt: Date.now(), messages: [...s.messages, mirrorMsg] };
+        }
+        return s;
+      }));
     } catch (err) {
       // Clean fallback
       const lower = textToSend.toLowerCase();
@@ -429,7 +592,19 @@ export default function App() {
         memoryNote = `Newly Indexed Vector Node in CockroachDB: "${textToSend.slice(0, 35)}..."`;
       }
 
-      setChatMessages([...newMessages, { sender: 'mirror', text: responseText, memoryRecall: memoryNote }]);
+      const mirrorMsg: ChatMessage = {
+        sender: 'mirror',
+        text: responseText,
+        memoryRecall: memoryNote,
+        timestamp: Date.now()
+      };
+
+      setChatSessions(prev => prev.map(s => {
+        if (s.id === currentId) {
+          return { ...s, updatedAt: Date.now(), messages: [...s.messages, mirrorMsg] };
+        }
+        return s;
+      }));
     } finally {
       setIsSimulatingInference(false);
     }
@@ -1724,102 +1899,136 @@ export default function App() {
 
       {/* --- INTERACTIVE TRY MIRROR MODAL --- */}
       {isTryMirrorOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="w-full max-w-3xl rounded-2xl border border-slate-800 bg-[#090D16] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+          <div className="w-full max-w-5xl lg:max-w-6xl rounded-2xl border border-slate-800 bg-[#090D16] shadow-2xl overflow-hidden flex flex-col md:flex-row h-[90vh] md:h-[88vh] max-h-[850px] relative">
             
-            <div className="px-6 py-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <MirrorLogoEmblem size="sm" />
-                <div>
-                  <h3 className="text-sm font-bold text-white">Mirror AI Live Sandbox</h3>
-                  <span className="text-[11px] text-emerald-400 font-mono flex items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping" />
-                    CockroachDB Memory Active
-                  </span>
-                </div>
-              </div>
+            {/* Left Chat History Sidebar */}
+            <ChatSidebar
+              sessions={chatSessions}
+              activeChatId={activeChatId}
+              onSelectChat={handleSelectChat}
+              onNewChat={handleNewChat}
+              onDeleteChat={handleDeleteChat}
+              onRenameChat={handleRenameChat}
+              isOpen={isSidebarOpen}
+              onToggleOpen={() => setIsSidebarOpen(!isSidebarOpen)}
+            />
 
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={handleResetMemory}
-                  disabled={isSimulatingInference}
-                  title="Wipe all memory nodes and reset chat session"
-                  className="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center space-x-1.5 transition-colors disabled:opacity-50"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Reset Memory</span>
-                </button>
+            {/* Right Main Chat Sandbox Viewport */}
+            <div className="flex-1 flex flex-col min-w-0 bg-[#090D16] h-full relative">
+              
+              {/* Top Header Bar */}
+              <div className="px-4 sm:px-6 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between flex-shrink-0">
+                <div className="flex items-center space-x-3 min-w-0">
+                  <button
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    title={isSidebarOpen ? "Collapse Chats Sidebar" : "Expand Chats Sidebar"}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors flex-shrink-0"
+                  >
+                    <PanelLeft className="w-4 h-4 text-purple-400" />
+                  </button>
 
-                <button 
-                  onClick={() => setIsTryMirrorOpen(false)}
-                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 overflow-y-auto flex-1 space-y-4">
-              {chatMessages.map((msg, idx) => (
-                <div key={idx} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}>
+                  <MirrorLogoEmblem size="sm" />
                   
-                  <div className={`max-w-xl p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${
-                    msg.sender === 'user' 
-                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-tr-none' 
-                      : 'bg-slate-900/90 border border-slate-800 text-slate-200 rounded-tl-none'
-                  }`}>
-                    {msg.text}
-                  </div>
-
-                  {msg.memoryRecall && (
-                    <span className="text-[10px] font-mono text-purple-400 mt-1 bg-purple-500/10 px-2.5 py-0.5 rounded border border-purple-500/20">
-                      ⚡ {msg.memoryRecall}
+                  <div className="min-w-0">
+                    <h3 className="text-xs sm:text-sm font-bold text-white truncate max-w-[180px] sm:max-w-md">
+                      {activeSession?.title || 'Mirror AI Live Sandbox'}
+                    </h3>
+                    <span className="text-[10px] text-emerald-400 font-mono flex items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping flex-shrink-0" />
+                      CockroachDB Memory Active
                     </span>
-                  )}
+                  </div>
                 </div>
-              ))}
 
-              {isSimulatingInference && (
-                <div className="flex items-center space-x-2 text-xs text-purple-400 font-mono p-2">
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                  <span>CockroachDB MCP querying pgvector embeddings...</span>
+                <div className="flex items-center space-x-2 flex-shrink-0">
+                  <button
+                    onClick={handleResetMemory}
+                    disabled={isSimulatingInference}
+                    title="Wipe all memory nodes in CockroachDB and reset chat"
+                    className="px-2.5 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center space-x-1.5 transition-colors disabled:opacity-50"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Reset Memory</span>
+                  </button>
+
+                  <button 
+                    onClick={() => setIsTryMirrorOpen(false)}
+                    className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
                 </div>
-              )}
-            </div>
+              </div>
 
-            <div className="px-6 py-2 bg-slate-950 border-t border-slate-800/80 flex items-center space-x-2 overflow-x-auto no-scrollbar">
-              <span className="text-[10px] font-mono text-slate-400 flex-shrink-0">Try prompt:</span>
-              {[
-                "Query CockroachDB memory layer",
-                "Audit AWS infrastructure status",
-                "Check Hackathon 2026 rules compliance"
-              ].map((p, i) => (
+              {/* Chat Messages Body */}
+              <div className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-4 custom-scrollbar">
+                {chatMessages.map((msg, idx) => (
+                  <div key={idx} className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} transition-all duration-300 animate-fadeIn`}>
+                    
+                    <div className={`max-w-xl p-3.5 sm:p-4 rounded-2xl text-xs sm:text-sm leading-relaxed ${
+                      msg.sender === 'user' 
+                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-tr-none shadow-md shadow-purple-950/30' 
+                        : 'bg-slate-900/90 border border-slate-800 text-slate-200 rounded-tl-none shadow-md shadow-slate-950/50'
+                    }`}>
+                      {msg.text}
+                    </div>
+
+                    {msg.memoryRecall && (
+                      <span className="text-[10px] font-mono text-purple-400 mt-1 bg-purple-500/10 px-2.5 py-0.5 rounded border border-purple-500/20">
+                        ⚡ {msg.memoryRecall}
+                      </span>
+                    )}
+                  </div>
+                ))}
+
+                {isSimulatingInference && (
+                  <div className="flex items-center space-x-2 text-xs text-purple-400 font-mono p-2 bg-purple-500/5 rounded-lg border border-purple-500/10 w-fit animate-pulse">
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-purple-400" />
+                    <span>CockroachDB MCP querying pgvector embeddings...</span>
+                  </div>
+                )}
+
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Try Prompt Quick Chips */}
+              <div className="px-4 sm:px-6 py-2 bg-slate-950 border-t border-slate-800/80 flex items-center space-x-2 overflow-x-auto no-scrollbar flex-shrink-0">
+                <span className="text-[10px] font-mono text-slate-400 flex-shrink-0">Try prompt:</span>
+                {[
+                  "Query CockroachDB memory layer",
+                  "Audit AWS infrastructure status",
+                  "Check Hackathon 2026 rules compliance"
+                ].map((p, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSendChatMessage(p)}
+                    className="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[11px] text-slate-300 border border-slate-800 flex-shrink-0 transition-colors"
+                  >
+                    "{p}"
+                  </button>
+                ))}
+              </div>
+
+              {/* Message Input Form */}
+              <div className="p-3 sm:p-4 bg-slate-900 border-t border-slate-800 flex items-center space-x-3 flex-shrink-0">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendChatMessage()}
+                  placeholder="Ask Mirror about agentic memory, code, or hackathon rules..."
+                  className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 placeholder-slate-500"
+                />
                 <button
-                  key={i}
-                  onClick={() => handleSendChatMessage(p)}
-                  className="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-[11px] text-slate-300 border border-slate-800 flex-shrink-0 transition-colors"
+                  onClick={() => handleSendChatMessage()}
+                  disabled={isSimulatingInference || !chatInput.trim()}
+                  className="p-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white disabled:opacity-50 transition-colors flex items-center justify-center flex-shrink-0"
                 >
-                  "{p}"
+                  <Send className="w-4 h-4" />
                 </button>
-              ))}
-            </div>
+              </div>
 
-            <div className="p-4 bg-slate-900 border-t border-slate-800 flex items-center space-x-3">
-              <input
-                type="text"
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSendChatMessage()}
-                placeholder="Ask Mirror about agentic memory, code, or hackathon rules..."
-                className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 placeholder-slate-500"
-              />
-              <button
-                onClick={() => handleSendChatMessage()}
-                disabled={isSimulatingInference || !chatInput.trim()}
-                className="p-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white disabled:opacity-50 transition-colors flex items-center justify-center"
-              >
-                <Send className="w-4 h-4" />
-              </button>
             </div>
 
           </div>

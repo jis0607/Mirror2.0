@@ -32,7 +32,8 @@ A 10–15 second GIF showing: Landing Page → Launch Mirror → Chat → Memory
 
 ## 📸 Screenshot: Hero Landing Page
 
-> [ INSERT SCREENSHOT HERE ]
+<img width="955" height="407" alt="image" src="https://github.com/user-attachments/assets/46943b1c-6ec3-46ce-acd5-18e77f4f392b" />
+
 
 **Description:**  
 Show the complete Mirror AI landing page with the hero section visible, highlighting the persistent memory companion title and call to action.
@@ -44,7 +45,7 @@ Show the complete Mirror AI landing page with the hero section visible, highligh
 
 ## 📸 Screenshot: Live Deployment
 
-> [ INSERT SCREENSHOT HERE ]
+<img width="952" height="476" alt="image" src="https://github.com/user-attachments/assets/e8c2797f-64c7-4519-b8a3-91299f1a7dce" />
 
 **Description:**  
 Show Mirror AI running live in production on the deployment URL with SSL secure status and operational backend connectivity.
@@ -56,7 +57,8 @@ Show Mirror AI running live in production on the deployment URL with SSL secure 
 
 ## 📸 Screenshot: GitHub Repository
 
-> [ INSERT SCREENSHOT HERE ]
+<img width="959" height="428" alt="image" src="https://github.com/user-attachments/assets/3df4aace-3ee3-46f7-93d8-1cbcc9e43985" />
+
 
 **Description:**  
 Show the official GitHub repository structure (`jis0607/Mirror2.0`) with clean commit history, badges, and code organization.

@@ -35,6 +35,31 @@ export class ProjectTracker {
     return this.activeProject;
   }
 
+  public resetProject(): void {
+    this.activeProject = {
+      id: 'proj-mirror',
+      name: 'Mirror AI Companion',
+      subtitle: 'Persistent Agentic Memory Web Application',
+      techStack: [
+        'React',
+        'Vite',
+        'Tailwind CSS',
+        'Express.js',
+        'CockroachDB pgvector'
+      ],
+      architectureSummary: 'Full-stack Express + Vite architecture with server-side AI Companion pipeline and CockroachDB vector memory engine.',
+      activeTasks: [
+        'Record new user details and preferences',
+        'Store persistent memories in pgvector'
+      ],
+      completedTasks: [
+        'Initialized clean memory session'
+      ],
+      lastModified: new Date().toISOString(),
+      status: 'in_progress'
+    };
+  }
+
   public updateActiveProject(updates: Partial<ProjectItem>): ProjectItem {
     this.activeProject = {
       ...this.activeProject,

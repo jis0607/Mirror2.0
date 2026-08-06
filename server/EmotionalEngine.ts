@@ -150,6 +150,15 @@ export class EmotionalEngine {
     };
   }
 
+  public resetEmotions(): void {
+    this.currentMotivation = 'high';
+    this.currentStress = 'calm';
+    this.confidenceLevel = 'confident';
+    this.recentEmotions = [];
+    this.recentAchievements = [];
+    this.recentSetbacks = [];
+  }
+
   public addAchievement(achievement: string) {
     this.recentAchievements.unshift(achievement);
     if (this.recentAchievements.length > 5) this.recentAchievements.pop();

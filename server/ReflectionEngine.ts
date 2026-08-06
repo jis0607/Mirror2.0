@@ -22,6 +22,10 @@ export class ReflectionEngine {
     return this.reflections;
   }
 
+  public resetReflections(): void {
+    this.reflections = [];
+  }
+
   public generateReflectionFromChat(userText: string, aiText: string): ReflectionLog {
     const today = new Date().toISOString().split('T')[0];
     const newLog: ReflectionLog = {

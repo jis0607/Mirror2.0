@@ -55,6 +55,26 @@ async function startServer() {
     }
   });
 
+  app.delete('/api/companion/memories', (req, res) => {
+    memoryEngineInstance.clearAllMemories();
+    res.json({ success: true, message: 'All memory nodes cleared.' });
+  });
+
+  app.post('/api/companion/reset', (req, res) => {
+    memoryEngineInstance.clearAllMemories();
+    goalTrackerInstance.resetGoals();
+    projectTrackerInstance.resetProject();
+    emotionalEngineInstance.resetEmotions();
+    reflectionEngineInstance.resetReflections();
+    contextEngineInstance.resetHistory();
+
+    res.json({
+      success: true,
+      message: 'All memory nodes, context, user profile, goals, and conversation history have been completely reset.',
+      initialGreeting: "Hello! I am Mirror AI, your long-term AI companion powered by CockroachDB pgvector. I don't have any saved memories about you yet—what is your name or what project are you working on today?"
+    });
+  });
+
   app.post('/api/companion/memories', (req, res) => {
     const { category, title, content, tags, source } = req.body;
     if (!title || !content) {

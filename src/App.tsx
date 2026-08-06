@@ -26,6 +26,8 @@ import {
   Flame, 
   CheckCircle2, 
   RefreshCw, 
+  RotateCcw,
+  Trash2,
   BookOpen,
   Trophy,
   Award,
@@ -344,16 +346,32 @@ export default function App() {
   const [isVideoDemoOpen, setIsVideoDemoOpen] = useState(false);
   const [isArchDiagramOpen, setIsArchDiagramOpen] = useState(false);
   
+  // Clean initial greeting for new chat sessions
+  const CLEAN_INITIAL_MESSAGE = {
+    sender: 'mirror' as const,
+    text: "Hello! I am **Mirror AI**, your long-term AI Companion powered by CockroachDB pgvector. I don't have any saved memories about you yet—what is your name, or what are you working on today?",
+    memoryRecall: 'CockroachDB Recall: Memory layer clean | Ready to record new user memories'
+  };
+
   // Interactive Chat Sandbox state
   const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'mirror'; text: string; memoryRecall?: string }>>([
-    {
-      sender: 'mirror',
-      text: "Hello Jishnu! I remembered that you're submitting **Mirror AI** for the **CockroachDB × AWS Hackathon** using React, Express, CockroachDB pgvector, and AWS Lambda. How can I help verify our agentic memory state today?",
-      memoryRecall: 'CockroachDB Recall: User = Jishnu Singh | Event = CockroachDB x AWS Hackathon 2026 | Memory Layer = pgvector Cluster'
-    }
+    CLEAN_INITIAL_MESSAGE
   ]);
   const [chatInput, setChatInput] = useState('');
   const [isSimulatingInference, setIsSimulatingInference] = useState(false);
+
+  // Reset Memory / New Chat handler
+  const handleResetMemory = async () => {
+    setIsSimulatingInference(true);
+    try {
+      await fetch('/api/companion/reset', { method: 'POST' });
+    } catch (err) {
+      console.error('Reset memory API call failed:', err);
+    } finally {
+      setChatMessages([CLEAN_INITIAL_MESSAGE]);
+      setIsSimulatingInference(false);
+    }
+  };
 
   // Mouse move handler for glow effect
   useEffect(() => {
@@ -601,6 +619,14 @@ export default function App() {
                     </div>
 
                     <div className="flex items-center space-x-2">
+                      <button
+                        onClick={handleResetMemory}
+                        title="Wipe memory and start clean chat"
+                        className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition-colors"
+                      >
+                        <RotateCcw className="w-3 h-3 mr-1" />
+                        Reset Memory
+                      </button>
                       <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/20">
                         <Activity className="w-3 h-3 mr-1 text-purple-400 animate-pulse" />
                         CRDB Memory Active
@@ -644,7 +670,7 @@ export default function App() {
                               <span className="text-xs font-semibold text-slate-200">Active Hackathon Target</span>
                               <span className="text-[10px] text-slate-500">Just now</span>
                             </div>
-                            <p className="text-xs text-slate-400 mt-0.5">"User Jishnu Singh submitted Mirror AI for CockroachDB × AWS Hackathon 2026."</p>
+                            <p className="text-xs text-slate-400 mt-0.5">"Agentic memory layer initialized on CockroachDB pgvector for CockroachDB × AWS Hackathon 2026."</p>
                           </div>
                         </div>
 
@@ -1713,12 +1739,24 @@ export default function App() {
                 </div>
               </div>
 
-              <button 
-                onClick={() => setIsTryMirrorOpen(false)}
-                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={handleResetMemory}
+                  disabled={isSimulatingInference}
+                  title="Wipe all memory nodes and reset chat session"
+                  className="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-xs font-semibold flex items-center space-x-1.5 transition-colors disabled:opacity-50"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reset Memory</span>
+                </button>
+
+                <button 
+                  onClick={() => setIsTryMirrorOpen(false)}
+                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             <div className="p-6 overflow-y-auto flex-1 space-y-4">

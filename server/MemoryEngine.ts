@@ -65,6 +65,18 @@ export class MemoryEngine {
     ];
   }
 
+  public clearAllMemories(): void {
+    this.memories = [];
+    this.userProfile = {
+      codingLevel: 'intermediate',
+      preferredFrameworks: ['React', 'TypeScript', 'Express.js', 'Tailwind CSS'],
+      preferredDB: ['CockroachDB Cloud', 'pgvector'],
+      communicationStyle: 'concise',
+      ambitions: ['Build AI Companion apps with persistent memory'],
+      habits: ['Clean modular architecture']
+    };
+  }
+
   public getProfile(): UserPreferences {
     return this.userProfile;
   }
@@ -130,7 +142,11 @@ export class MemoryEngine {
   public extractAndStoreMemoriesFromChat(userText: string): MemoryNode | null {
     const lower = userText.toLowerCase();
 
-    if (lower.includes('learning') || lower.includes('study') || lower.includes('course') || lower.includes('dsa') || lower.includes('weak in')) {
+    if (lower.includes('my name is') || lower.includes('i am ') || lower.includes("i'm ") || lower.includes('call me ')) {
+      return this.addMemory('profile', 'User Identity & Name', userText, ['user-name', 'identity', 'profile']);
+    } else if (lower.includes('friend') || lower.includes('teammate') || lower.includes('colleague') || lower.includes('working with')) {
+      return this.addMemory('relationship', 'Friend & Teammate Identity', userText, ['relationship', 'friend', 'social']);
+    } else if (lower.includes('learning') || lower.includes('study') || lower.includes('course') || lower.includes('dsa') || lower.includes('weak in')) {
       return this.addMemory('learning', 'Learning History Node', userText, ['learning', 'skill-track']);
     } else if (lower.includes('my goal') || lower.includes('i want to build') || lower.includes('i plan to')) {
       return this.addMemory('goal', 'Extracted Goal', userText, ['user-goal', 'extracted']);
@@ -138,7 +154,7 @@ export class MemoryEngine {
       return this.addMemory('project', 'Extracted Project Detail', userText, ['user-project', 'extracted']);
     } else if (lower.includes('i prefer') || lower.includes('my stack is') || lower.includes('i use')) {
       return this.addMemory('preference', 'Extracted User Preference', userText, ['user-preference', 'extracted']);
-    } else if (userText.length > 30 && !lower.includes('hello') && !lower.includes('hi')) {
+    } else if (userText.length > 20 && !lower.includes('hello') && !lower.includes('hi')) {
       return this.addMemory('conversation', 'Key Interaction Memory', userText, ['conversation', 'context-node']);
     }
 

@@ -62,6 +62,10 @@ export class ContextEngine {
   public getHistorySummary(): string {
     return this.recentConversationHistory.join("\n");
   }
+
+  public resetHistory(): void {
+    this.recentConversationHistory = [];
+  }
 }
 
 export const contextEngineInstance = new ContextEngine();

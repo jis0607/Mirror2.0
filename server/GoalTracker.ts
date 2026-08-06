@@ -53,6 +53,30 @@ export class GoalTracker {
     return this.goals;
   }
 
+  public resetGoals(): void {
+    this.goals = [
+      {
+        id: 'goal-1',
+        title: 'Ship AI Companion Application',
+        description: 'Build persistent agentic memory companion app using CockroachDB pgvector, Managed MCP Server endpoint, and AWS serverless infrastructure.',
+        deadline: '2026-08-18T17:00:00-05:00',
+        progressPercentage: 50,
+        completedMilestones: [
+          'Provision CockroachDB Cloud cluster with pgvector',
+          'Configure Managed MCP Server connection endpoint'
+        ],
+        pendingMilestones: [
+          'Record video demonstration',
+          'Submit public project repository'
+        ],
+        streakDays: 1,
+        status: 'active',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }
+    ];
+  }
+
   public addGoal(goal: Omit<GoalItem, 'id' | 'createdAt' | 'updatedAt'>): GoalItem {
     const newGoal: GoalItem = {
       ...goal,

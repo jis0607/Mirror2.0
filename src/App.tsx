@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import standingMirrorLogo from './assets/images/standing_mirror_logo_1785987560344.jpg';
 import { ChatMessage, ChatSession } from './types';
 import { ChatSidebar } from './components/ChatSidebar';
+import { MemoryGraphModal } from './components/MemoryGraphModal';
 import { 
   Sparkles, 
   Brain, 
@@ -349,7 +350,7 @@ export default function App() {
   
   // Modals state
   const [isTryMirrorOpen, setIsTryMirrorOpen] = useState(false);
-  const [isVideoDemoOpen, setIsVideoDemoOpen] = useState(false);
+  const [isMemoryGraphOpen, setIsMemoryGraphOpen] = useState(false);
   const [isArchDiagramOpen, setIsArchDiagramOpen] = useState(false);
   
   // Clean initial greeting for new chat sessions
@@ -737,10 +738,11 @@ export default function App() {
                 </button>
 
                 <button 
-                  onClick={() => setIsVideoDemoOpen(true)}
-                  className="px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm hover:text-white transition-all duration-200 flex items-center justify-center space-x-2.5 group backdrop-blur-md"
+                  onClick={() => setIsMemoryGraphOpen(true)}
+                  className="px-7 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm hover:text-white transition-all duration-200 flex items-center justify-center space-x-2.5 group backdrop-blur-md shadow-lg shadow-purple-950/20"
                 >
-                  <span>View Demo Video</span>
+                  <Database className="w-4 h-4 text-purple-400 group-hover:scale-110 transition-transform" />
+                  <span>Memory Graph</span>
                 </button>
 
                 <button 
@@ -2035,58 +2037,13 @@ export default function App() {
         </div>
       )}
 
-      {/* --- INTERACTIVE VIEW DEMO VIDEO MODAL --- */}
-      {isVideoDemoOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="w-full max-w-4xl rounded-2xl border border-slate-800 bg-[#090D16] shadow-2xl overflow-hidden flex flex-col">
-            
-            <div className="px-6 py-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
-                  <Play className="w-4 h-4 fill-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold text-white">Mirror AI — Hackathon Video Demonstration (&lt; 3 Mins)</h3>
-                  <span className="text-[11px] text-emerald-400 font-mono">Devpost Requirement: Showcase CockroachDB Memory Layer</span>
-                </div>
-              </div>
-
-              <button 
-                onClick={() => setIsVideoDemoOpen(false)}
-                className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="relative aspect-video bg-slate-950 flex flex-col items-center justify-center p-8 text-center overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/20 via-indigo-900/20 to-blue-900/20" />
-              
-              <div className="w-20 h-20 rounded-full bg-purple-600/30 border border-purple-500/50 flex items-center justify-center text-purple-300 shadow-2xl shadow-purple-500/30 mb-4 animate-bounce">
-                <Play className="w-8 h-8 fill-purple-300 ml-1" />
-              </div>
-
-              <h4 className="text-xl font-bold text-white z-10 mb-2">CockroachDB Agentic Memory Showcase</h4>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-md z-10 leading-relaxed mb-4">
-                Watch how Mirror connects to CockroachDB Managed MCP (`https://cockroachlabs.cloud/mcp`), queries distributed pgvector embeddings, and persists goals across sessions on AWS Lambda.
-              </p>
-
-              <div className="flex items-center space-x-3 z-10">
-                <button 
-                  onClick={() => {
-                    setIsVideoDemoOpen(false);
-                    setIsTryMirrorOpen(true);
-                  }}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold text-xs transition-transform hover:scale-105"
-                >
-                  Launch Live Sandbox
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      )}
+      {/* --- COCKROACHDB VECTOR MEMORY GRAPH MODAL --- */}
+      <MemoryGraphModal
+        isOpen={isMemoryGraphOpen}
+        onClose={() => setIsMemoryGraphOpen(false)}
+        activeSession={activeSession}
+        onOpenChat={() => setIsTryMirrorOpen(true)}
+      />
 
       {/* --- ARCHITECTURAL DIAGRAM MODAL --- */}
       {isArchDiagramOpen && (

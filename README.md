@@ -128,7 +128,7 @@ Show the CockroachDB Cloud Console and AWS Cloud Infrastructure dashboard displa
 
 ## 🌟 Key Features & AI Companion Architecture
 
-### 1. 🧠 7-Layer Real-Time Context Engine
+### 1. 🧠 7-Layer Real-Time Context Engine & `pgvector` Memory Graph
 Before answering any query, Mirror AI instantly synthesizes 7 contextual vectors:
 1. **User Identity & Personal Profile**: Skill level, preferred frameworks, communication style.
 2. **Emotional Context Layer**: Tracked motivation levels, stress indicators, confidence, and recent setbacks/achievements.
@@ -137,6 +137,16 @@ Before answering any query, Mirror AI instantly synthesizes 7 contextual vectors
 5. **Project Architecture**: Active repositories, task backlogs, and multi-file dependencies.
 6. **Session Short-Term Memory**: Conversation window summary across recent turns.
 7. **Proactive Relationship & Nudge Engine**: Contextual follow-ups, milestone celebrations, and architectural suggestions.
+
+> ⚡ **Interactive Memory Graph Inspector**: Access the live CockroachDB `pgvector` Memory Graph from the hero section to inspect vector nodes, search cosine similarity matches, view telemetry latency, and inject custom memory vectors!
+
+---
+
+### 2. 💬 Modern Multi-Session Chat History Sidebar
+* **ChatGPT/Claude-Style Chat Sidebar**: Automatically saves chat sessions locally using browser LocalStorage without polluting the database.
+* **Timeline Grouping & Management**: Organizes conversations into *Today*, *Yesterday*, *Previous 7 Days*, and *Older*.
+* **Full Session Control**: Features one-click *New Chat*, inline session renaming, chat search filtering, and conversation deletion.
+* **Mobile Responsive & Collapsible**: Smooth collapsible drawer with responsive navigation controls.
 
 ---
 

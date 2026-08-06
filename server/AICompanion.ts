@@ -94,21 +94,28 @@ ${context.activeGoals.map(g => `  • ${g.title} (${g.progressPercentage}% compl
     if (client) {
       try {
         const response = await client.models.generateContent({
-          model: 'gemini-3.6-flash',
-          contents: userMessage,
-          config: {
-            systemInstruction: systemPrompt,
-            temperature: 0.7,
-            maxOutputTokens: 1024
-          }
-        });
+        model: 'gemini-2.5-flash',
+        contents: userMessage,
+        config: {
+       systemInstruction: systemPrompt,
+       temperature: 0.7,
+      maxOutputTokens: 1024
+        }
+      });
 
         if (response.text) {
           responseText = response.text;
         }
       } catch (err: any) {
-        console.warn('Gemini API call failed, falling back to intelligent Context Engine fallback:', err?.message || err);
-      }
+  console.error("========== GEMINI ERROR ==========");
+  console.error(err);
+  console.error("=================================");
+
+  console.warn(
+    'Gemini API call failed, falling back to intelligent Context Engine fallback:',
+    err?.message || err
+  );
+}
     }
 
     // High quality intelligent fallback if API key is not present or API call errored

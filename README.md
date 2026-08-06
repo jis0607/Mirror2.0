@@ -32,12 +32,13 @@ A 10–15 second GIF showing: Landing Page → Launch Mirror → Chat → Memory
 
 ## 📸 Screenshot: Hero Landing Page
 
-><img width="955" height="376" alt="Screenshot 2026-08-06 091313" src="https://github.com/user-attachments/assets/98f70ba3-9a34-46d7-8c71-b2328620d802" />
-
+> [ INSERT SCREENSHOT HERE ]
 
 **Description:**  
 Show the complete Mirror AI landing page with the hero section visible, highlighting the persistent memory companion title and call to action.
 
+**Recommended filename:**  
+`docs/images/landing-page.png`
 
 ---
 
@@ -48,7 +49,8 @@ Show the complete Mirror AI landing page with the hero section visible, highligh
 **Description:**  
 Show Mirror AI running live in production on the deployment URL with SSL secure status and operational backend connectivity.
 
-
+**Recommended filename:**  
+`docs/images/live-deployment.png`
 
 ---
 

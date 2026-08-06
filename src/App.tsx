@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import standingMirrorLogo from './assets/images/standing_mirror_logo_1785987560344.jpg';
 import { 
   Sparkles, 
   Brain, 
@@ -275,23 +276,58 @@ const judgingCriteria = [
 
 function MirrorLogoEmblem({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   const containerSize = size === 'sm' ? 'w-9 h-9' : size === 'lg' ? 'w-12 h-12' : 'w-11 h-11';
-  const fontSize = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : 'text-base';
   
   return (
     <div className="relative group flex-shrink-0">
-      {/* Outer glowing aura effect */}
-      <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 opacity-75 blur-md group-hover:opacity-100 transition duration-300 animate-pulse" />
+      {/* Glowing background aura */}
+      <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 opacity-80 blur-sm group-hover:opacity-100 transition duration-300 animate-pulse" />
       
-      {/* Simple, sleek container */}
-      <div className={`relative ${containerSize} rounded-xl bg-[#030712] border border-purple-500/40 flex items-center justify-center overflow-hidden shadow-lg shadow-purple-950/50`}>
-        {/* Inner subtle glow gradient */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-indigo-500/15 to-transparent" />
-        
-        {/* Simple glowing MIRROR "M" symbol */}
-        <span className={`font-black font-mono ${fontSize} tracking-tighter text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.9)] select-none`}>
-          M
-        </span>
+      {/* Sleek container with standing mirror image */}
+      <div className={`relative ${containerSize} rounded-xl bg-[#030712] border border-purple-500/50 flex items-center justify-center overflow-hidden shadow-lg shadow-purple-950/60 p-[1px]`}>
+        <img 
+          src={standingMirrorLogo} 
+          alt="Mirror AI Standing Logo" 
+          className="w-full h-full object-cover rounded-[10px] group-hover:scale-105 transition-transform duration-300"
+        />
       </div>
+    </div>
+  );
+}
+
+function LiveDigitalClock() {
+  const [timeStr, setTimeStr] = useState<string>('');
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+
+      const strHours = String(hours).padStart(2, '0');
+      const strMinutes = String(minutes).padStart(2, '0');
+      const strSeconds = String(seconds).padStart(2, '0');
+
+      setTimeStr(`${strHours}:${strMinutes}:${strSeconds} ${ampm}`);
+    };
+
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="hidden sm:flex flex-col items-center justify-center px-3.5 py-1.5 rounded-xl bg-slate-900/80 border border-purple-500/30 shadow-[0_0_12px_rgba(168,85,247,0.15)] backdrop-blur-md select-none transition-all duration-200">
+      <div className="flex items-center space-x-1.5 text-xs font-semibold font-mono text-white tracking-wide">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span>{timeStr || '09:42:00 AM'}</span>
+      </div>
+      <span className="text-[9px] font-medium text-purple-300/80 uppercase tracking-widest -mt-0.5">
+        Local Time
+      </span>
     </div>
   );
 }
@@ -456,12 +492,7 @@ export default function App() {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-3">
-            <button 
-              onClick={() => setIsVideoDemoOpen(true)}
-              className="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 transition-all duration-200"
-            >
-              <span>Demo Video</span>
-            </button>
+            <LiveDigitalClock />
             <button 
               onClick={() => setIsTryMirrorOpen(true)}
               className="relative group overflow-hidden rounded-xl p-[1px] font-medium text-xs transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 active:scale-95"

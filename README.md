@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" width="150" alt="<img width="104" height="107" alt="image" src="https://github.com/user-attachments/assets/8d358027-59c6-48f4-8878-7430ce569141" />
-">
+  <img src="https://github.com/user-attachments/assets/8d358027-59c6-48f4-8878-7430ce569141" width="150" alt="Mirror 2.0 Logo">
 </p>
 
 <h1 align="center">🪞 Mirror 2.0</h1>

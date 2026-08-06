@@ -1,9 +1,13 @@
 <p align="center">
-  <img src="public/standing_mirror_logo.jpg" width="150" alt="Mirror 2.0 Logo" style="border-radius: 20px;">
+  <img src="public/standing_mirror_logo.jpg" width="150" alt="" style="border-radius: 20px;">
 </p>
 
 <h1 align="center"><img width="169" height="170" alt="image" src="https://github.com/user-attachments/assets/25ac38f8-ffad-43e4-bb87-90342bdeb62c" />
 </h1>
+
+<p align="center">
+Mirror2.0
+</p>
 
 <p align="center">
 An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you</b> using persistent memory powered by CockroachDB pgvector and AWS.

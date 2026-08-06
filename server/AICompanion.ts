@@ -94,7 +94,7 @@ ${context.activeGoals.map(g => `  • ${g.title} (${g.progressPercentage}% compl
     if (client) {
       try {
         const response = await client.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'models/gemini-3.6-flash',
         contents: userMessage,
         config: {
        systemInstruction: systemPrompt,

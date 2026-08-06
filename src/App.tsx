@@ -273,6 +273,29 @@ const judgingCriteria = [
   }
 ];
 
+function MirrorLogoEmblem({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const containerSize = size === 'sm' ? 'w-9 h-9' : size === 'lg' ? 'w-12 h-12' : 'w-11 h-11';
+  const fontSize = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : 'text-base';
+  
+  return (
+    <div className="relative group flex-shrink-0">
+      {/* Outer glowing aura effect */}
+      <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 opacity-75 blur-md group-hover:opacity-100 transition duration-300 animate-pulse" />
+      
+      {/* Simple, sleek container */}
+      <div className={`relative ${containerSize} rounded-xl bg-[#030712] border border-purple-500/40 flex items-center justify-center overflow-hidden shadow-lg shadow-purple-950/50`}>
+        {/* Inner subtle glow gradient */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-indigo-500/15 to-transparent" />
+        
+        {/* Simple glowing MIRROR "M" symbol */}
+        <span className={`font-black font-mono ${fontSize} tracking-tighter text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.9)] select-none`}>
+          M
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('memory');
   const [activeScreenshot, setActiveScreenshot] = useState('chat');
@@ -403,11 +426,7 @@ export default function App() {
           
           {/* Brand Logo */}
           <a href="#" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 p-[1px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-300">
-              <div className="w-full h-full bg-[#090D16] rounded-[11px] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-purple-400 group-hover:rotate-12 transition-transform duration-300" />
-              </div>
-            </div>
+            <MirrorLogoEmblem size="md" />
             <div className="flex flex-col">
               <span className="font-bold text-xl tracking-tight text-white flex items-center gap-1.5">
                 MIRROR
@@ -1590,9 +1609,7 @@ export default function App() {
             
             <div className="md:col-span-6 space-y-4">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-blue-500 flex items-center justify-center text-white">
-                  <Sparkles className="w-4 h-4" />
-                </div>
+                <MirrorLogoEmblem size="sm" />
                 <span className="font-bold text-lg text-white tracking-tight">MIRROR AI</span>
               </div>
               <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
@@ -1655,9 +1672,7 @@ export default function App() {
             
             <div className="px-6 py-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white">
-                  <Sparkles className="w-4 h-4" />
-                </div>
+                <MirrorLogoEmblem size="sm" />
                 <div>
                   <h3 className="text-sm font-bold text-white">Mirror AI Live Sandbox</h3>
                   <span className="text-[11px] text-emerald-400 font-mono flex items-center">

@@ -1,353 +1,304 @@
-# 🪞 Mirror AI — Persistent Agentic Memory Companion
+<p align="center">
+  <img src="public/standing_mirror_logo.jpg" width="150" alt="Mirror 2.0 Logo" style="border-radius: 20px;">
+</p>
 
-> **Official Devpost Submission for the CockroachDB × AWS Hackathon 2026**  
-> *Solving AI Context Amnesia with Distributed Vector Memory, CockroachDB Managed MCP, and AWS Cloud Infrastructure.*
+<h1 align="center">🪞 Mirror 2.0</h1>
 
-[![CockroachDB](https://img.shields.io/badge/CockroachDB-Managed%20MCP%20%2B%20pgvector-blue?style=for-the-badge&logo=cockroachlabs)](https://cockroachlabs.cloud/mcp)
-[![AWS Infrastructure](https://img.shields.io/badge/AWS-Lambda%20%7C%20Bedrock%20%7C%20S3-orange?style=for-the-badge&logo=amazon-aws)](https://aws.amazon.com)
-[![React 19](https://img.shields.io/badge/Frontend-React%2019%20%7C%20Tailwind-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/Language-TypeScript%20ESM-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
+<p align="center">
+An AI Companion that <b>remembers</b>, <b>understands</b>, and <b>grows with you</b> using persistent memory powered by CockroachDB pgvector and AWS.
+</p>
 
----
+<p align="center">
 
-## 🔗 Quick Links
+![License](https://img.shields.io/badge/License-MIT-blue)
+![CockroachDB](https://img.shields.io/badge/CockroachDB-pgvector-red)
+![AWS](https://img.shields.io/badge/AWS-Lambda-orange)
+![React](https://img.shields.io/badge/React-19-blue)
+![Express](https://img.shields.io/badge/Express-TypeScript-black)
+![Gemini](https://img.shields.io/badge/Google-Gemini-4285F4)
+![Production](https://img.shields.io/badge/Production-Ready-brightgreen)
 
-* 🚀 **Live Interactive App**: [Mirror AI Live Application](https://ais-dev-oyqiukmvzejmm3ufsdcqx6-807460345850.asia-east1.run.app)
-* 📦 **GitHub Repository**: [jis0607/Mirror2.0](https://github.com/jis0607/Mirror2.0)
-* 👨‍💻 **Developer**: **Jishnu Singh** ([GitHub](https://github.com/jis0607) | [LinkedIn](https://www.linkedin.com/in/jishnu-singh06/) | `jishnusingh0607@gmail.com`)
+</p>
 
----
+<p align="center">
 
-## 🎥 Demo GIF
+<a href="https://github.com/jis0607/Mirror2.0">🌐 Live Demo</a> •
+<a href="https://github.com/jis0607/Mirror2.0">🎥 Demo Video</a> •
+<a href="#-features">✨ Features</a> •
+<a href="#-architecture">🏗 Architecture</a> •
+<a href="#-getting-started">🚀 Getting Started</a>
 
-> [ INSERT DEMO GIF HERE ]
-
-**Description:**  
-A 10–15 second GIF showing: Landing Page → Launch Mirror → Chat → Memory Recall → Goal Tracker → Reflection.
-
-**Recommended filename:**  
-`docs/images/demo.gif`
-
----
-
-## 📸 Screenshot: Hero Landing Page
-
-<img width="955" height="407" alt="image" src="https://github.com/user-attachments/assets/46943b1c-6ec3-46ce-acd5-18e77f4f392b" />
-
-
-**Description:**  
-Show the complete Mirror AI landing page with the hero section visible, highlighting the persistent memory companion title and call to action.
-
-**Recommended filename:**  
-`docs/images/landing-page.png`
+</p>
 
 ---
 
-## 📸 Screenshot: Live Deployment
+# 🎬 Watch the Demo First
 
-<img width="952" height="476" alt="image" src="https://github.com/user-attachments/assets/e8c2797f-64c7-4519-b8a3-91299f1a7dce" />
+> ⭐ **Recommended for judges:** Watch the **3-minute demo** to see how Mirror 2.0 stores, retrieves, and reasons over long-term memories using CockroachDB pgvector and AWS.
 
-**Description:**  
-Show Mirror AI running live in production on the deployment URL with SSL secure status and operational backend connectivity.
+<p align="center">
 
-**Recommended filename:**  
-`docs/images/live-deployment.png`
+<a href="https://github.com/jis0607/Mirror2.0">
 
----
+<img src="assets/demo-thumbnail.png" width="100%" alt="Demo Video Thumbnail">
 
-## 📸 Screenshot: GitHub Repository
+</a>
 
-<img width="959" height="428" alt="image" src="https://github.com/user-attachments/assets/3df4aace-3ee3-46f7-93d8-1cbcc9e43985" />
+</p>
 
+<p align="center">
 
-**Description:**  
-Show the official GitHub repository structure (`jis0607/Mirror2.0`) with clean commit history, badges, and code organization.
+<a href="https://github.com/jis0607/Mirror2.0">
 
-**Recommended filename:**  
-`docs/images/github-repository.png`
+<img src="https://img.shields.io/badge/▶️%20WATCH%20DEMO%20VIDEO-red?style=for-the-badge">
 
----
+</a>
 
-## ⚡ The Core Problem: AI Amnesia
-
-Current AI assistants suffer from **session isolation and memory decay**. Every new chat tab wipes the slate clean — forcing software engineers and creators to continuously re-explain their stack architecture, project milestones, personal preferences, and historical decisions.
-
-Traditional single-region databases crash under high-frequency autonomous agent write bursts, while standard vector databases lack strict transactional consistency.
+</p>
 
 ---
 
-## 💡 The Solution: Mirror AI
+# 📑 Table of Contents
 
-**Mirror AI** transforms the LLM interaction pattern from a temporary Q&A tool into a **continuous, self-evolving AI Companion**. 
-
-Powered by **CockroachDB multi-region `pgvector`** and **Managed MCP Server (`https://cockroachlabs.cloud/mcp`)**, Mirror constructs a **7-layer cognitive graph** before every response, combining structured relational tables with semantic vector search and real-time **Emotional Intelligence context** to build a genuine long-term relationship across infinite sessions with zero downtime.
-
----
-
-## 📸 Screenshot: Live Dashboard
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the central Mirror AI dashboard interface displaying real-time memory stats, goal progress bars, and active project state.
-
-**Recommended filename:**  
-`docs/images/live-dashboard.png`
+- [Overview](#-overview)
+- [Problem](#-problem)
+- [Solution](#-solution)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Memory Pipeline](#-memory-pipeline)
+- [Screenshots](#-screenshots)
+- [Technology Stack](#-technology-stack)
+- [Repository Structure](#-repository-structure)
+- [Getting Started](#-getting-started)
+- [Future Roadmap](#-future-roadmap)
+- [License](#-license)
 
 ---
 
-## 🛠️ Mandatory Hackathon Tooling Matrix
+# 🌟 Overview
 
-### 🪳 CockroachDB Capabilities (4/4 Implemented)
-| Feature | Implementation Detail |
-| :--- | :--- |
-| **1. Managed MCP Server** | Live connection via `https://cockroachlabs.cloud/mcp` providing audit logging, RBAC, and single-config agent memory inspection. |
-| **2. Categorized `pgvector` Store** | Multi-table structure separating Profile, Goals, Projects, Learning, Reflections, and Emotional Context Nodes for precise vector retrieval. |
-| **3. `ccloud` CLI Control Plane** | Service account management, cluster scaling, and backup automation prior to refactoring. |
-| **4. Agent Skills Repo** | Machine-executable SQL optimization and database maintenance skills embedded in the agent workflow. |
+Traditional AI assistants suffer from **context amnesia**.
 
-### ☁️ AWS Cloud Services (4/4 Implemented)
-| Service | Role in Architecture |
-| :--- | :--- |
-| **1. AWS Lambda** | Serverless hooks for background embedding calculation and asynchronous memory synchronization. |
-| **2. Amazon Bedrock** | Foundation model inference pipeline and agentic workflow orchestration. |
-| **3. Amazon S3** | Durable storage bucket (`mirror-reflections`) for archiving daily reflection logs and project snapshots. |
-| **4. Amazon ECS / EKS** | High-throughput containerized API execution layer for backend microservices. |
+Once a conversation ends, they forget everything.
+
+Mirror 2.0 introduces a production-grade persistent memory system where conversations become searchable long-term memories using CockroachDB pgvector.
 
 ---
 
-## 📸 Screenshot: CockroachDB + AWS Workflow
+# ❗ Problem
 
-> [ INSERT SCREENSHOT HERE ]
+Current AI assistants:
 
-**Description:**  
-Show the CockroachDB Cloud Console and AWS Cloud Infrastructure dashboard displaying active cluster metrics, Managed MCP connection logs, and S3 reflection buckets.
-
-**Recommended filename:**  
-`docs/images/cockroachdb-aws-workflow.png`
-
----
-
-## 🌟 Key Features & AI Companion Architecture
-
-### 1. 🧠 7-Layer Real-Time Context Engine & `pgvector` Memory Graph
-Before answering any query, Mirror AI instantly synthesizes 7 contextual vectors:
-1. **User Identity & Personal Profile**: Skill level, preferred frameworks, communication style.
-2. **Emotional Context Layer**: Tracked motivation levels, stress indicators, confidence, and recent setbacks/achievements.
-3. **Categorized Vector Memory Nodes**: Semantic similarity matches retrieved from CockroachDB `pgvector`.
-4. **Active Goals & Velocity**: Deadlines, milestone progress, and streak metrics.
-5. **Project Architecture**: Active repositories, task backlogs, and multi-file dependencies.
-6. **Session Short-Term Memory**: Conversation window summary across recent turns.
-7. **Proactive Relationship & Nudge Engine**: Contextual follow-ups, milestone celebrations, and architectural suggestions.
-
-> ⚡ **Interactive Memory Graph Inspector**: Access the live CockroachDB `pgvector` Memory Graph from the hero section to inspect vector nodes, search cosine similarity matches, view telemetry latency, and inject custom memory vectors!
+- Forget past conversations & preferences
+- Lose project context across sessions
+- Cannot build genuine, long-term relationships
+- Restart from zero context on every session
 
 ---
 
-### 2. 💬 Modern Multi-Session Chat History Sidebar
-* **ChatGPT/Claude-Style Chat Sidebar**: Automatically saves chat sessions locally using browser LocalStorage without polluting the database.
-* **Timeline Grouping & Management**: Organizes conversations into *Today*, *Yesterday*, *Previous 7 Days*, and *Older*.
-* **Full Session Control**: Features one-click *New Chat*, inline session renaming, chat search filtering, and conversation deletion.
-* **Mobile Responsive & Collapsible**: Smooth collapsible drawer with responsive navigation controls.
+# 💡 Solution
+
+Mirror 2.0 stores every important interaction as semantic memory.
+
+Instead of remembering raw chat history,
+
+it remembers **meaning**.
+
+Using vector embeddings, the assistant retrieves relevant memories before generating every response.
 
 ---
 
-## 📸 Screenshot: Chat Interface
+# ✨ Features
 
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the main conversational AI Companion chat view displaying context-aware responses, Markdown rendering, and personalized dialogue.
-
-**Recommended filename:**  
-`docs/images/chat-interface.png`
-
----
-
-## 📸 Screenshot: Persistent Memory Recall
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the memory recall interface displaying retrieved CockroachDB `pgvector` memory nodes, match confidence scores, and categorical tags (Profile, Goals, Projects, Learning).
-
-**Recommended filename:**  
-`docs/images/memory-recall.png`
+- 🧠 **Persistent AI Memory**: Long-term context indexing powered by CockroachDB.
+- 🔍 **Semantic Vector Search**: High-dimensional `pgvector` similarity retrieval.
+- ⚡ **CockroachDB pgvector**: Managed vector database engine via MCP server integration.
+- ☁ **AWS Cloud Infrastructure**: Serverless Lambda pipeline and S3 backups.
+- 🤖 **Gemini Powered Responses**: Deep contextual reasoning using Google Gemini models.
+- 💬 **Multiple Chat Sessions**: ChatGPT & Claude style sidebar with local storage persistence.
+- 📈 **Memory Graph Inspector**: Real-time vector node browser with cosine similarity testing.
+- 🔄 **Long-term Context Recall**: Recalls goals, preferences, emotional state, and milestones.
+- 🎯 **Agentic Memory Architecture**: Proactive nudges, milestone tracking, and relationship intelligence.
+- 🌍 **Production Ready Deployment**: Full-stack Express + React 19 architecture ready for Cloud Run.
 
 ---
 
-### 2. ❤️ Emotional Intelligence & Relationship Engine
-* **Contextual Awareness, Not Fake Sycophancy**: Never pretends to be human or use cheap boilerplate sympathy ("I'm sorry"). Instead, grounds empathy in real shared history (e.g., *"I remember last week you were excited about this opportunity. I know this is disappointing, but look at the backend progress you've achieved."*).
-* **Categorized Emotional Nodes**: Detects stress, frustration, burnout signals, and milestone pride, persisting them as structured `emotion` nodes in CockroachDB.
-* **Calm Milestone Celebrations**: Acknowledges real developer achievements and goal completions without hyperbolic exaggeration.
+# 🏗 Architecture
 
----
+<p align="center">
 
-## 📸 Screenshot: Emotional Intelligence
+<img src="assets/architecture.png" width="900" alt="Mirror 2.0 System Architecture">
 
-> [ INSERT SCREENSHOT HERE ]
+</p>
 
-**Description:**  
-Show the Emotional Intelligence context layer panel displaying tracked motivation level, stress indicators, confidence gauges, and historical emotional memory nodes.
-
-**Recommended filename:**  
-`docs/images/emotional-intelligence.png`
-
----
-
-### 3. 🎯 Goal & Milestone Velocity Engine
-* Breaks ambitious technical projects into actionable daily milestones stored with ACID durability.
-* Tracks developer velocity, streak metrics, and milestone completion percentages in real time.
-
----
-
-## 📸 Screenshot: Goal Tracker
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the Goal Velocity Engine displaying active project deadlines, completion percentages, milestone breakdown lists, and streak metrics.
-
-**Recommended filename:**  
-`docs/images/goal-tracker.png`
-
----
-
-### 4. 🗂️ Project Awareness Workspace
-* Maps code file trees, dependencies, and completed benchmarks.
-* Runs safety checks via the `ccloud` CLI before introducing structural codebase changes.
-
----
-
-## 📸 Screenshot: Project Awareness
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the Project Workspace panel mapping the active codebase structure, repository dependencies, task backlog, and current architectural decisions.
-
-**Recommended filename:**  
-`docs/images/project-awareness.png`
-
----
-
-### 5. 📑 Automated Daily Reflection Engine
-* Synthesizes end-of-day accomplishment logs, focus trends, and commit breakthroughs.
-* Automatically archives daily reflection artifacts to Amazon S3.
-
----
-
-## 📸 Screenshot: Reflection Engine
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the Daily Reflection Timeline displaying synthesized wins, lessons learned, focus trends, and AWS S3 archive synchronization status.
-
-**Recommended filename:**  
-`docs/images/reflection-engine.png`
-
----
-
-### 6. 💡 Proactive Check-Ins & Nudge Engine
-* Automatically greets users with context-aware follow-ups on past blockers (*"Welcome back! Yesterday you were debugging the memory engine. Did you solve it?"*).
-
----
-
-## 📸 Screenshot: Suggestion Engine
-
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show the Proactive Nudge Engine generating real-time architectural recommendations, bug warnings, and contextual follow-up prompts.
-
-**Recommended filename:**  
-`docs/images/suggestion-engine.png`
-
----
-
-## 📐 System Architecture
-
-```
-                   ┌─────────────────────────────────────────┐
-                   │        Mirror AI Client (React 19)      │
-                   └────────────────────┬────────────────────┘
-                                        │ REST API (JSON)
-                                        ▼
-                   ┌─────────────────────────────────────────┐
-                   │    Express.js Context Assembly Server    │
-                   └───────────┬─────────────────┬───────────┘
-                               │                 │
-      Vector Search & MCP Sync │                 │ Serverless Events & Storage
-   ┌───────────────────────────┘                 └───────────────────────────┐
-   ▼                                                                         ▼
-┌─────────────────────────────────┐                       ┌─────────────────────────────────┐
-│ CockroachDB Cloud Cluster       │                       │ AWS Cloud Infrastructure        │
-│  • Managed MCP Endpoint         │                       │  • AWS Lambda Triggers          │
-│  • pgvector Embedding Index     │                       │  • Amazon Bedrock Agent         │
-│  • ACID Goals & Project Tables  │                       │  • Amazon S3 (`mirror-bucket`)  │
-└─────────────────────────────────┘                       └─────────────────────────────────┘
+```text
+User
+   │
+   ▼
+React Frontend
+   │
+Express Backend
+   │
+Embedding Generation
+   │
+CockroachDB pgvector
+   │
+Semantic Search
+   │
+Relevant Memories
+   │
+Gemini
+   │
+Final Personalized Response
 ```
 
 ---
 
-## 📸 Screenshot: Architecture Diagram
+# 🧠 Memory Pipeline
 
-> [ INSERT SCREENSHOT HERE ]
-
-**Description:**  
-Show a visual diagram or schematic rendering of the full-stack system data flow between React 19, Express.js, CockroachDB Managed MCP, pgvector, and AWS Cloud infrastructure.
-
-**Recommended filename:**  
-`docs/images/architecture-diagram.png`
-
----
-
-## 🏆 Devpost Judging Criteria Matrix
-
-| Judging Criteria | Weight | How Mirror AI Exceeds Expectations |
-| :--- | :---: | :--- |
-| **Agentic Memory Design** | **20%** | CockroachDB `pgvector` serves as the primary cognitive memory bank for 100% of user context, past conversations, and goal graphs with multi-region consistency. |
-| **Technical Implementation** | **20%** | Modular ESM TypeScript architecture with Express middleware, Managed MCP Server integration, and AWS Lambda serverless execution. |
-| **Real-World Impact** | **20%** | Solves context decay for developers, creators, and students by providing a continuous companion that remembers goals and technical decisions. |
-| **Production Readiness** | **20%** | Leverages CockroachDB's 99.999% SLA, strict service-account RBAC via `ccloud` CLI, full MCP audit logging, and encrypted AWS pipelines. |
-| **Creativity & Originality** | **20%** | Reimagines AI from a transient chat box into a self-evolving reflection journal, goal mentor, and project co-pilot with persistent memory. |
+1. **User sends a message** in the chat UI
+2. **Important information extracted** (identity, goals, preferences, emotional cues)
+3. **1536-dimensional Embedding generated** for key concepts
+4. **Stored inside CockroachDB pgvector** cluster
+5. **Future queries perform similarity search** to retrieve context vectors
+6. **Relevant memories injected** into the Gemini system prompt
+7. **Personalized, context-aware response generated**
 
 ---
 
-## 🚀 Local Installation & Setup
+# 📸 Screenshots
 
-### Prerequisites
-* **Node.js**: v18.0+ or v20.0+
-* **npm**: v9.0+
-* **CockroachDB Account**: Free cluster on [cockroachlabs.cloud](https://cockroachlabs.cloud)
+## Landing Page
 
-### 1. Clone Repo
+<p align="center">
+<img src="screenshots/home.png" alt="Home Landing Page">
+</p>
+
+---
+
+## AI Chat & History Sidebar
+
+<p align="center">
+<img src="screenshots/chat.png" alt="Interactive AI Chat Sandbox">
+</p>
+
+---
+
+## Persistent Memory Graph
+
+<p align="center">
+<img src="screenshots/memory.png" alt="CockroachDB Vector Memory Graph">
+</p>
+
+---
+
+## Architecture Diagram
+
+<p align="center">
+<img src="screenshots/architecture.png" alt="System Architecture Diagram">
+</p>
+
+---
+
+# ⚙ Technology Stack
+
+| Category | Technology |
+|-----------|------------|
+| **Frontend** | React 19 + TypeScript + Vite |
+| **Backend** | Express.js + TypeScript |
+| **AI Model** | Google Gemini API (`@google/genai`) |
+| **Database** | CockroachDB (Managed MCP Server) |
+| **Vector Engine** | `pgvector` embeddings |
+| **Cloud** | AWS Lambda + S3 Infrastructure |
+| **Styling** | Tailwind CSS + Lucide Icons |
+
+---
+
+# 📂 Repository Structure
+
+```text
+Mirror2.0
+│
+├── public/
+│   └── standing_mirror_logo.jpg
+├── src/
+│   ├── components/
+│   │   ├── ChatSidebar.tsx
+│   │   └── MemoryGraphModal.tsx
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── types.ts
+│   └── index.css
+├── server/
+│   ├── AICompanion.ts
+│   ├── MemoryEngine.ts
+│   └── ProjectTracker.ts
+├── screenshots/
+├── assets/
+├── README.md
+├── LICENSE
+└── package.json
+```
+
+---
+
+# 🚀 Getting Started
+
+### 1. Clone the repository
+
 ```bash
-git clone https://github.com/jis0607/Mirror2.0.git
+git clone https://github.com/jis0607/Mirror2.0
 cd Mirror2.0
 ```
 
-### 2. Environment Variables (`.env`)
-```env
-PORT=3000
-GEMINI_API_KEY="your-gemini-api-key"
-GROQ_API_KEY="your-groq-api-key"
-COCKROACH_MCP_ENDPOINT="https://cockroachlabs.cloud/mcp"
-COCKROACH_CLUSTER_ID="your-cockroach-cluster-id"
-AWS_REGION="us-east-1"
-AWS_S3_BUCKET="mirror-reflections"
-```
+### 2. Install dependencies
 
-### 3. Install & Run
 ```bash
 npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+GROQ_API_KEY=your_groq_api_key_here
+DATABASE_URL=your_cockroachdb_connection_string
+```
+
+### 4. Run the development server
+
+```bash
 npm run dev
 ```
-Open `http://localhost:3000` to interact with Mirror AI.
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📄 License
+# 🔮 Future Roadmap
 
-This project is licensed under the [MIT License](LICENSE).
+- 🎙 **Voice Conversations**: Real-time voice interaction with emotional tone synthesis.
+- ✏ **Memory Editing**: User-facing controls to edit or prune indexed memories.
+- 🔄 **Cross-device Sync**: Cloud-synced chat history across browser sessions.
+- 🤖 **Multi-Agent Collaboration**: Specialized sub-agents for coding, planning, and review.
+- 💡 **Emotion Detection**: Deep sentiment analysis for nuanced companion responses.
+- 📅 **Calendar & Tasks Integration**: Proactive reminder triggers for upcoming deadlines.
+- 📚 **RAG Knowledge Base**: Upload personal documents and codebases into memory.
+
+---
+
+# 📜 License
+
+Distributed under the [MIT License](LICENSE).
+
+---
+
+<p align="center">
+
+Built with ❤️ by **Jishnu Singh**
+
+**Mirror 2.0 — AI that remembers.**
+
+</p>

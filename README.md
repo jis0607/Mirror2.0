@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" width="150" alt="Mirror 2.0 Logo">
+  <img src="public/logo.jpg" width="150" alt="Mirror 2.0 Logo">
 </p>
 
 <h1 align="center">🪞 Mirror 2.0</h1>

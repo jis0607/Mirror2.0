@@ -179,7 +179,7 @@ Final Personalized Response
 The first experience of Mirror 2.0 showcasing the AI companion, persistent memory engine, and CockroachDB × AWS integration.
 
 <p align="center">
-  <img src="screenshots/landing-page.png" width="100%" alt="Mirror 2.0 Landing Page">
+  <img src="https://github.com/user-attachments/assets/3ab59853-0979-477f-b7c1-3a6efa9ed1ed" width="100%" alt="Mirror 2.0 Landing Page">
 </p>
 
 ---

@@ -174,37 +174,43 @@ Final Personalized Response
 
 # 📸 Screenshots
 
-## Landing Page
+## 🏠 Landing Page
+
+The first experience of Mirror 2.0 showcasing the AI companion, persistent memory engine, and CockroachDB × AWS integration.
 
 <p align="center">
-<img src="screenshots/home.png">
+  <img src="screenshots/landing-page.png" width="100%" alt="Mirror 2.0 Landing Page">
 </p>
 
 ---
 
-## AI Chat
+## 💬 AI Companion Chat
+
+Persistent conversations powered by CockroachDB pgvector with intelligent memory recall.
 
 <p align="center">
-<img src="screenshots/chat.png">
+  <img src="screenshots/chat-interface.png" width="100%" alt="Mirror Chat Interface">
 </p>
 
 ---
 
-## Persistent Memory
+## ⚡ Persistent Memory Recall
+
+Mirror retrieves relevant memories instead of relying only on the current conversation.
 
 <p align="center">
-<img src="screenshots/memory.png">
+  <img src="screenshots/memory-recall.png" width="100%" alt="Persistent Memory Recall">
 </p>
 
 ---
 
-## Architecture
+## 🚀 Architecture Overview
+
+How React, Express, Gemini, CockroachDB pgvector, MCP Server, and AWS work together.
 
 <p align="center">
-<img src="screenshots/architecture.png">
+  <img src="screenshots/architecture.png" width="100%" alt="Architecture">
 </p>
-
----
 
 # ⚙ Technology Stack
 

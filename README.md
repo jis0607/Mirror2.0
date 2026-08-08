@@ -189,7 +189,7 @@ The first experience of Mirror 2.0 showcasing the AI companion, persistent memor
 Persistent conversations powered by CockroachDB pgvector with intelligent memory recall.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/0c695d2d-44ef-4fde-9510-0833ef2ad7c0" />
+  <img src="https://github.com/user-attachments/assets/0c695d2d-44ef-4fde-9510-0833ef2ad7c0
 " width="100%" alt="Mirror Chat Interface">
 </p>
 

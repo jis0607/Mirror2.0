@@ -199,7 +199,7 @@ Persistent conversations powered by CockroachDB pgvector with intelligent memory
 Mirror retrieves relevant memories instead of relying only on the current conversation.
 
 <p align="center">
-  <img src="screenshots/memory-recall.png" width="100%" alt="Persistent Memory Recall">
+  <img src="https://github.com/user-attachments/assets/9688f6d5-5dec-4d51-a1ac-16c307375bb6" width="100%" alt="Persistent Memory Recall">
 </p>
 
 ---
